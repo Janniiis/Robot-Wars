@@ -2,7 +2,7 @@ package com.btcag.bootcamp;
 
 import java.util.Scanner;
 
-public class SurfaceTest {
+public class RobotWars {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String ascii = "                                                                                                                                                                                                               \n" +
