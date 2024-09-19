@@ -41,6 +41,11 @@ public class RobotWars {
         System.out.println("Hi, " + RoboName);
 
         System.out.println("Beginnen wir mit dem Aussehen deines Roboters, wähle eine Zahl zwischen 1 und 5: ");
+        System.out.println("Avatar 1 -> %\n" +
+                "Avatar 2 -> §\n" +
+                "Avatar 3 -> ^\n" +
+                "Avatar 4 -> #\n" +
+                "Avatar 5 -> *");
         int avatar = scanner.nextInt();
         String icon = "";
         switch (avatar){
@@ -81,5 +86,7 @@ public class RobotWars {
             System.out.println("");
             i++;
         }
+
+
     }
 }
