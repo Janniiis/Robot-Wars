@@ -48,7 +48,7 @@ public class RobotWars {
                 "Avatar 5 -> *");
         int avatar = scanner.nextInt();
         String icon = "";
-        switch (avatar){
+        switch (avatar) {
             case 1:
                 icon = "%";
                 break;
@@ -70,7 +70,7 @@ public class RobotWars {
                 break;
 
         }
-        System.out.println("Dein Avatar sieht folgendermaßen aus: "+icon);
+        System.out.println("Dein Avatar sieht folgendermaßen aus: " + icon);
 
         System.out.println(ascii);
 
