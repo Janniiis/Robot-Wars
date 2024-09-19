@@ -40,6 +40,33 @@ public class RobotWars {
         String RoboName = scanner.nextLine();
         System.out.println("Hi, " + RoboName);
 
+        System.out.println("Beginnen wir mit dem Aussehen deines Roboters, wähle eine Zahl zwischen 1 und 5: ");
+        int avatar = scanner.nextInt();
+        String icon = "";
+        switch (avatar){
+            case 1:
+                icon = "%";
+                break;
+
+            case 2:
+                icon = "§";
+                break;
+
+            case 3:
+                icon = "^";
+                break;
+
+            case 4:
+                icon = "#";
+                break;
+
+            case 5:
+                icon = "*";
+                break;
+
+        }
+        System.out.println("Dein Avatar sieht folgendermaßen aus: "+icon);
+
         System.out.println(ascii);
 
         System.out.println("Bestimme die Größe deines Spielfeldes: ");
