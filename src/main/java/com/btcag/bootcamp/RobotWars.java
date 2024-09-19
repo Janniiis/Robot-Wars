@@ -30,7 +30,7 @@ public class RobotWars {
                 "                                                                                                                                                                                                               \n" +
                 "                                                                                                                                                                                                               \n" +
                 "                                                                                                                                                                                                               ";
-
+        System.out.println(ascii);
         System.out.println("Bitte geben Sie ihren Gamertag ein: ");
         String username = scanner.nextLine();
         System.out.println("Willkommen " + username + "!");
@@ -72,8 +72,6 @@ public class RobotWars {
         }
         System.out.println("Dein Avatar sieht folgendermaßen aus: " + icon);
 
-        System.out.println(ascii);
-
         System.out.println("Bestimme die Größe deines Spielfeldes: ");
         int number = scanner.nextInt();
         int i = 0;
@@ -82,11 +80,13 @@ public class RobotWars {
             while (j < number) {
                 System.out.print("[ ]");
                 j++;
+                if(i == 3 && j ==6){
+                    System.out.print("["+icon+"]");
+                    j++;
+                }
             }
             System.out.println("");
             i++;
         }
-
-
     }
 }
