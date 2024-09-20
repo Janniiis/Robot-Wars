@@ -80,7 +80,7 @@ public class RobotWars {
             while (j < number) {
                 System.out.print("[ ]");
                 j++;
-                if(i == 3 && j ==6){
+                while(i == 3 && j ==6){
                     System.out.print("["+icon+"]");
                     j++;
                 }
