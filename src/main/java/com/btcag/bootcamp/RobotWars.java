@@ -46,31 +46,19 @@ public class RobotWars {
                 "Avatar 3 -> ^\n" +
                 "Avatar 4 -> #\n" +
                 "Avatar 5 -> *");
-        int avatar = scanner.nextInt();
-        String icon = "";
-        switch (avatar) {
-            case 1:
-                icon = "%";
-                break;
-
-            case 2:
-                icon = "§";
-                break;
-
-            case 3:
-                icon = "^";
-                break;
-
-            case 4:
-                icon = "#";
-                break;
-
-            case 5:
-                icon = "*";
-                break;
-
+        char avatar;
+        avatar = scanner.nextLine().charAt(0);
+        while (avatar > 0) {
+            while (avatar < 6) {
+                while (avatar == 1) avatar = '%';
+                while (avatar == 2) avatar = '§';
+                while (avatar == 3) avatar = 'Ω';
+                while (avatar == 4) avatar = '#';
+                while (avatar == 5) avatar = '*';
+            }
+            break;
         }
-        System.out.println("Dein Avatar sieht folgendermaßen aus: " + icon);
+        System.out.println("Dein Avatar sieht folgendermaßen aus: " + avatar);
 
         System.out.println("Bestimme die Größe deines Spielfeldes: ");
         int number = scanner.nextInt();
@@ -80,8 +68,8 @@ public class RobotWars {
             while (j < number) {
                 System.out.print("[ ]");
                 j++;
-                while(i == 3 && j ==6){
-                    System.out.print("["+icon+"]");
+                while (i == 3 && j == 6) {
+                    System.out.print("[" + avatar + "]");
                     j++;
                 }
             }
