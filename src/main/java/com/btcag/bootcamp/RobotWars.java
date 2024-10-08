@@ -91,6 +91,7 @@ public class RobotWars {
 
         //------------------ Gameplay ------------------------------
 
+        playField();
         gameplay();
 
     }
@@ -196,7 +197,6 @@ public class RobotWars {
     }
 
     public static void gameplay(){
-        playField();
         while (gameState){
             movementPlayerOne();
             movementPlayerTwo();
