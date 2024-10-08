@@ -4,11 +4,14 @@ import java.util.Scanner;
 
 public class RobotWars {
 
-    public static int rows = 10;
-    public static int columns = 15;
-    public static String field = "[ ]";
-    public static String[][] playfield = new String[rows][columns];
-
+    public static int playerOneY = 0;
+    public static int playerOneX = 7;
+    public static int playerTwoY = 9;
+    public static int playerTwoX = 7;
+    public static String avatarIconPlayerOne = "";
+    public static String avatarIconPlayerTwo = "";
+    public static Scanner readIn = new Scanner(System.in);
+    public static boolean state = true;
 
 
     public static void main(String[] args) {
@@ -48,13 +51,20 @@ public class RobotWars {
         String RoboName = readIn.nextLine();
         System.out.println("Hi, " + RoboName);
         System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
-        int icon = readIn.nextInt();
-        chooseAvatar(icon);
+        System.out.print("Wähle ein Icon für Spieler 1: ");
+        avatarIconPlayerOne = chooseAvatar(readIn.nextInt());
+
+        System.out.print("Wähle ein Icon für Spieler 2: ");
+        avatarIconPlayerTwo = chooseAvatar(readIn.nextInt());
+
+        System.out.println("Avatar Spieler 1: " + avatarIconPlayerOne);
+        System.out.println("Avatar Spieler 2: " + avatarIconPlayerTwo);
+        playField();
     }
 
 
     public static String chooseAvatar(int icon) {
-        String avatarIcon = "";
+        String avatarIcon;
         switch (icon) {
             case 1:
                 avatarIcon = "%";
@@ -78,34 +88,47 @@ public class RobotWars {
         return avatarIcon;
     }
 
-    public static void playField(int number, String avatarIcon) {
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < columns; j++){
-                playfield[i][j] = field;
-            }
+    public static void avatarCheck() {
+        if (avatarIconPlayerTwo.equals(avatarIconPlayerOne)){
+            state = false;
         }
 
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < columns; j++){
-                System.out.print(playfield[i][j] + " ");
+    }
+
+    public static void playField() {
+        int y = 0;
+        while (y < 10) {
+            int x = 0;
+            while (x < 15) {
+                while (y == playerOneY && x == playerOneX) {
+                    System.out.print("[" + avatarIconPlayerOne + "]");
+                    x++;
+                }
+                while (y == playerTwoY && x == playerTwoX) {
+                    System.out.print("[" + avatarIconPlayerTwo + "]");
+                    x++;
+                }
+                System.out.print("[ ]");
+                x++;
             }
             System.out.println();
+            y++;
         }
     }
 
-    public static void moveUp(){
+    public static void moveUp() {
 
     }
 
-    public static void moveLeft(){
+    public static void moveLeft() {
 
     }
 
-    public static void moveDown(){
+    public static void moveDown() {
 
     }
 
-    public static void moveRight(){
+    public static void moveRight() {
 
     }
 
