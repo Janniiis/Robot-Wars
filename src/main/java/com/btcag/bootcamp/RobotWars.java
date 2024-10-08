@@ -60,6 +60,7 @@ public class RobotWars {
         System.out.println("Avatar Spieler 1: " + avatarIconPlayerOne);
         System.out.println("Avatar Spieler 2: " + avatarIconPlayerTwo);
         playField();
+        gameplay();
     }
 
 
@@ -116,39 +117,58 @@ public class RobotWars {
         }
     }
 
-    public static void moveUp() {
-
-    }
-
-    public static void moveLeft() {
-
-    }
-
-    public static void moveDown() {
-
-    }
-
-    public static void moveRight() {
-
-    }
-
-    public static void movement(String input) {
+    public static void movementPlayerOne() {
+        String input = readIn.nextLine();
         switch (input) {
             case "w":
-                moveUp();
+                playerOneY--;
                 break;
 
             case "a":
-                moveLeft();
+                playerOneX--;
                 break;
 
             case "s":
-                moveDown();
+                playerOneY++;
                 break;
 
             case "d":
-                moveRight();
+                playerOneX++;
                 break;
+        }
+        playField();
+    }
+
+    public static void movementPlayerTwo() {
+        String input = readIn.nextLine();
+        switch (input) {
+            case "w":
+                playerTwoY--;
+                break;
+
+            case "a":
+                playerTwoX--;
+                break;
+
+            case "s":
+                playerTwoY++;
+                break;
+
+            case "d":
+                playerTwoX++;
+                break;
+        }
+        playField();
+    }
+
+    public static void gameplay(){
+        boolean gameState = true;
+        while (gameState){
+            movementPlayerOne();
+            movementPlayerTwo();
+            if (playerOneX == playerTwoX && playerOneY == playerTwoY){
+                gameState = false;
+            }
         }
     }
 }
