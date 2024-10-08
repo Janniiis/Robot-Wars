@@ -3,6 +3,14 @@ package com.btcag.bootcamp;
 import java.util.Scanner;
 
 public class RobotWars {
+
+    public static int rows = 10;
+    public static int columns = 15;
+    public static String field = "[ ]";
+    public static String[][] playfield = new String[rows][columns];
+
+
+
     public static void main(String[] args) {
         Scanner readIn = new Scanner(System.in);
         String ascii = "\"                                             bbbbbbbb                                                                                                                                                                   \\n\" +\n" +
@@ -42,11 +50,6 @@ public class RobotWars {
         System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
         int icon = readIn.nextInt();
         chooseAvatar(icon);
-        System.out.println("Wie groß soll das Spielfeld werden?");
-        int number = readIn.nextInt();
-        playField(number, chooseAvatar(icon));
-
-
     }
 
 
@@ -76,38 +79,52 @@ public class RobotWars {
     }
 
     public static void playField(int number, String avatarIcon) {
-        int i = 0;
-        while (i < number) {
-            int j = 0;
-            while (j < number) {
-                System.out.print("[ ]");
-                j++;
-                while (i == 3 && j == 6) {
-                    System.out.print("[" + avatarIcon + "]");
-                    j++;
-                }
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < columns; j++){
+                playfield[i][j] = field;
             }
-            System.out.println("");
-            i++;
         }
+
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < columns; j++){
+                System.out.print(playfield[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void moveUp(){
+
+    }
+
+    public static void moveLeft(){
+
+    }
+
+    public static void moveDown(){
+
+    }
+
+    public static void moveRight(){
+
     }
 
     public static void movement(String input) {
         switch (input) {
             case "w":
-
+                moveUp();
                 break;
 
             case "a":
-
+                moveLeft();
                 break;
 
             case "s":
-
+                moveDown();
                 break;
 
             case "d":
-
+                moveRight();
                 break;
         }
     }
