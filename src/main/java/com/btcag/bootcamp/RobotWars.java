@@ -4,14 +4,25 @@ import java.util.Scanner;
 
 public class RobotWars {
 
+    //-------------- Cords --------------
+
     public static int playerOneY = 0;
     public static int playerOneX = 7;
     public static int playerTwoY = 9;
     public static int playerTwoX = 7;
+
+    //-------------- Icons --------------
+
     public static String avatarIconPlayerOne = "";
     public static String avatarIconPlayerTwo = "";
+
+    //-------------- Sonstiges --------------
+
     public static Scanner readIn = new Scanner(System.in);
     public static boolean state = true;
+    public static boolean gameState = true;
+    public static String playerOne;
+    public static String playerTwo;
 
 
     public static void main(String[] args) {
@@ -42,25 +53,46 @@ public class RobotWars {
                 "                \"                                                                 ";
 
         System.out.println(ascii);
-        System.out.println("Bitte geben Sie ihren Gamertag ein: ");
-        String username = readIn.nextLine();
-        System.out.println("Willkommen " + username + "!");
 
-        System.out.println("Erstelle deinen eigenen Roboter.");
-        System.out.println("Gib deinem Roboter einen Namen: ");
-        String RoboName = readIn.nextLine();
-        System.out.println("Hi, " + RoboName);
+        //------------------ Player One ---------------------------
+
+        System.out.println("Bitte geben Sie ihren Gamertag ein (Player 1): ");
+        playerOne = readIn.nextLine();
+        System.out.println("Willkommen " + playerOne + "!");
+
+        System.out.println("Bitte gebe deinen Gamertag ein (Player 2):");
+        playerTwo = readIn.nextLine();
+        System.out.println("Willkommen " + playerTwo + "!");
+
+        //------------------ Roboter Erstellung --------------------
+
+        System.out.println("Erstellt euren eigenen Roboter!");
+
+        System.out.println("Gib deinem Roboter einen Namen (Player 1): ");
+        String robotNameOne = readIn.nextLine();
+        System.out.println("Hi, " + robotNameOne);
+
+        System.out.println("Gib deinem Roboter einen Namen (Player 2): ");
+        String robotNameTwo = readIn.nextLine();
+        System.out.println("Hi, " + robotNameTwo);
+
+        //------------------ Avatar / Icon -------------------------
+
         System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
-        System.out.print("Wähle ein Icon für Spieler 1: ");
+        System.out.print("Wähle ein Icon für Player 1: ");
         avatarIconPlayerOne = chooseAvatar(readIn.nextInt());
 
-        System.out.print("Wähle ein Icon für Spieler 2: ");
+        System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
+        System.out.print("Wähle ein Icon für Player 2: ");
         avatarIconPlayerTwo = chooseAvatar(readIn.nextInt());
 
         System.out.println("Avatar Spieler 1: " + avatarIconPlayerOne);
         System.out.println("Avatar Spieler 2: " + avatarIconPlayerTwo);
-        playField();
+
+        //------------------ Gameplay ------------------------------
+
         gameplay();
+
     }
 
 
@@ -118,6 +150,7 @@ public class RobotWars {
     }
 
     public static void movementPlayerOne() {
+        System.out.println(playerOne + " du bist dran! Mache einen Zug. (W, A, S, D)");
         String input = readIn.nextLine();
         switch (input) {
             case "w":
@@ -140,6 +173,7 @@ public class RobotWars {
     }
 
     public static void movementPlayerTwo() {
+        System.out.println(playerTwo + " du bist dran! Mache einen Zug. (W, A, S, D)");
         String input = readIn.nextLine();
         switch (input) {
             case "w":
@@ -162,11 +196,12 @@ public class RobotWars {
     }
 
     public static void gameplay(){
-        boolean gameState = true;
+        playField();
         while (gameState){
             movementPlayerOne();
             movementPlayerTwo();
             if (playerOneX == playerTwoX && playerOneY == playerTwoY){
+                System.out.println("Das Spiel ist vorbei!");
                 gameState = false;
             }
         }
