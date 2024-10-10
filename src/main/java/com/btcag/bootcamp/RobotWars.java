@@ -16,6 +16,12 @@ public class RobotWars {
     public static String avatarIconPlayerOne = "";
     public static String avatarIconPlayerTwo = "";
 
+    //-------------- Colors -----------------
+
+    public static String RESET = "\u001B[0m";
+    public static String RED = "\u001B[31m";
+    public static String BLUE = "\u001B[34m";
+
     //-------------- Sonstiges --------------
 
     public static Scanner readIn = new Scanner(System.in);
@@ -135,11 +141,11 @@ public class RobotWars {
             int x = 0;
             while (x < 15) {
                 while (y == playerOneY && x == playerOneX) {
-                    System.out.print("[" + avatarIconPlayerOne + "]");
+                    System.out.print(RED+"["+RESET + RED+avatarIconPlayerOne+RESET + RED+"]"+RESET);
                     x++;
                 }
                 while (y == playerTwoY && x == playerTwoX) {
-                    System.out.print("[" + avatarIconPlayerTwo + "]");
+                    System.out.print(BLUE+"["+RESET + BLUE+avatarIconPlayerTwo+RESET + BLUE+"]"+RESET);
                     x++;
                 }
                 System.out.print("[ ]");
