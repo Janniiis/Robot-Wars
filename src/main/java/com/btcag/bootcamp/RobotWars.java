@@ -21,6 +21,7 @@ public class RobotWars {
     public static String RESET = "\u001B[0m";
     public static String RED = "\u001B[31m";
     public static String BLUE = "\u001B[34m";
+    public static String WHITE = "\u001B[37m";
 
     //-------------- Sonstiges --------------
 
@@ -148,7 +149,7 @@ public class RobotWars {
                     System.out.print(BLUE+"["+RESET + BLUE+avatarIconPlayerTwo+RESET + BLUE+"]"+RESET);
                     x++;
                 }
-                System.out.print("[ ]");
+                System.out.print(WHITE+"[ ]"+RESET);
                 x++;
             }
             System.out.println();
