@@ -27,80 +27,84 @@ public class RobotWars {
 
     public static Scanner readIn = new Scanner(System.in);
     public static boolean state = true;
-    public static boolean gameState = true;
+    public static boolean gameState;
     public static String playerOne;
     public static String playerTwo;
 
 
     public static void main(String[] args) {
-        Scanner readIn = new Scanner(System.in);
-        String ascii = "\"                                             bbbbbbbb                                                                                                                                                                   \\n\" +\n" +
-                "                \"RRRRRRRRRRRRRRRRR                   b::::::b                                   ttttttt                           WWWWWWWW                           WWWWWWWW                                                   \\n\" +\n" +
-                "                \"R::::::::::::::::R                  b::::::b                                   t:::::t                           W::::::W                           W::::::W                                                   \\n\" +\n" +
-                "                \"R::::::RRRRRR:::::R                 b::::::b                                   t:::::t                           W::::::W                           W::::::W                                                   \\n\" +\n" +
-                "                \"RR:::::R     R:::::R                 b:::::b                                   t:::::t                           W::::::W                           W::::::W                                                   \\n\" +\n" +
-                "                \"  R::::R     R:::::R   ooooooooooo   b:::::bbbbbbbbb       ooooooooooo   ttttttt:::::ttttttt                      W:::::W           WWWWW           W:::::Waaaaaaaaaaaaa  rrrrr   rrrrrrrrr       ssssssssss   \\n\" +\n" +
-                "                \"  R::::R     R:::::R oo:::::::::::oo b::::::::::::::bb   oo:::::::::::oo t:::::::::::::::::t                       W:::::W         W:::::W         W:::::W a::::::::::::a r::::rrr:::::::::r    ss::::::::::s  \\n\" +\n" +
-                "                \"  R::::RRRRRR:::::R o:::::::::::::::ob::::::::::::::::b o:::::::::::::::ot:::::::::::::::::t                        W:::::W       W:::::::W       W:::::W  aaaaaaaaa:::::ar:::::::::::::::::r ss:::::::::::::s \\n\" +\n" +
-                "                \"  R:::::::::::::RR  o:::::ooooo:::::ob:::::bbbbb:::::::bo:::::ooooo:::::otttttt:::::::tttttt     ---------------     W:::::W     W:::::::::W     W:::::W            a::::arr::::::rrrrr::::::rs::::::ssss:::::s\\n\" +\n" +
-                "                \"  R::::RRRRRR:::::R o::::o     o::::ob:::::b    b::::::bo::::o     o::::o      t:::::t           -:::::::::::::-      W:::::W   W:::::W:::::W   W:::::W      aaaaaaa:::::a r:::::r     r:::::r s:::::s  ssssss \\n\" +\n" +
-                "                \"  R::::R     R:::::Ro::::o     o::::ob:::::b     b:::::bo::::o     o::::o      t:::::t           ---------------       W:::::W W:::::W W:::::W W:::::W     aa::::::::::::a r:::::r     rrrrrrr   s::::::s      \\n\" +\n" +
-                "                \"  R::::R     R:::::Ro::::o     o::::ob:::::b     b:::::bo::::o     o::::o      t:::::t                                  W:::::W:::::W   W:::::W:::::W     a::::aaaa::::::a r:::::r                  s::::::s   \\n\" +\n" +
-                "                \"  R::::R     R:::::Ro::::o     o::::ob:::::b     b:::::bo::::o     o::::o      t:::::t    tttttt                         W:::::::::W     W:::::::::W     a::::a    a:::::a r:::::r            ssssss   s:::::s \\n\" +\n" +
-                "                \"RR:::::R     R:::::Ro:::::ooooo:::::ob:::::bbbbbb::::::bo:::::ooooo:::::o      t::::::tttt:::::t                          W:::::::W       W:::::::W      a::::a    a:::::a r:::::r            s:::::ssss::::::s\\n\" +\n" +
-                "                \"R::::::R     R:::::Ro:::::::::::::::ob::::::::::::::::b o:::::::::::::::o      tt::::::::::::::t                           W:::::W         W:::::W       a:::::aaaa::::::a r:::::r            s::::::::::::::s \\n\" +\n" +
-                "                \"R::::::R     R:::::R oo:::::::::::oo b:::::::::::::::b   oo:::::::::::oo         tt:::::::::::tt                            W:::W           W:::W         a::::::::::aa:::ar:::::r             s:::::::::::ss  \\n\" +\n" +
-                "                \"RRRRRRRR     RRRRRRR   ooooooooooo   bbbbbbbbbbbbbbbb      ooooooooooo             ttttttttttt                               WWW             WWW           aaaaaaaaaa  aaaarrrrrrr              sssssssssss    \\n\" +\n" +
-                "                \"                                                                                                                                                                                                               \\n\" +\n" +
-                "                \"                                                                                                                                                                                                               \\n\" +\n" +
-                "                \"                                                                                                                                                                                                               \\n\" +\n" +
-                "                \"                                                                                                                                                                                                               \\n\" +\n" +
-                "                \"                                                                                                                                                                                                               \\n\" +\n" +
-                "                \"                                                                                                                                                                                                               \\n\" +\n" +
-                "                \"                                                                 ";
+        gameState = true;
+        while (gameState) {
 
-        System.out.println(ascii);
+            Scanner readIn = new Scanner(System.in);
+            String ascii = "\"                                             bbbbbbbb                                                                                                                                                                   \\n\" +\n" +
+                    "                \"RRRRRRRRRRRRRRRRR                   b::::::b                                   ttttttt                           WWWWWWWW                           WWWWWWWW                                                   \\n\" +\n" +
+                    "                \"R::::::::::::::::R                  b::::::b                                   t:::::t                           W::::::W                           W::::::W                                                   \\n\" +\n" +
+                    "                \"R::::::RRRRRR:::::R                 b::::::b                                   t:::::t                           W::::::W                           W::::::W                                                   \\n\" +\n" +
+                    "                \"RR:::::R     R:::::R                 b:::::b                                   t:::::t                           W::::::W                           W::::::W                                                   \\n\" +\n" +
+                    "                \"  R::::R     R:::::R   ooooooooooo   b:::::bbbbbbbbb       ooooooooooo   ttttttt:::::ttttttt                      W:::::W           WWWWW           W:::::Waaaaaaaaaaaaa  rrrrr   rrrrrrrrr       ssssssssss   \\n\" +\n" +
+                    "                \"  R::::R     R:::::R oo:::::::::::oo b::::::::::::::bb   oo:::::::::::oo t:::::::::::::::::t                       W:::::W         W:::::W         W:::::W a::::::::::::a r::::rrr:::::::::r    ss::::::::::s  \\n\" +\n" +
+                    "                \"  R::::RRRRRR:::::R o:::::::::::::::ob::::::::::::::::b o:::::::::::::::ot:::::::::::::::::t                        W:::::W       W:::::::W       W:::::W  aaaaaaaaa:::::ar:::::::::::::::::r ss:::::::::::::s \\n\" +\n" +
+                    "                \"  R:::::::::::::RR  o:::::ooooo:::::ob:::::bbbbb:::::::bo:::::ooooo:::::otttttt:::::::tttttt     ---------------     W:::::W     W:::::::::W     W:::::W            a::::arr::::::rrrrr::::::rs::::::ssss:::::s\\n\" +\n" +
+                    "                \"  R::::RRRRRR:::::R o::::o     o::::ob:::::b    b::::::bo::::o     o::::o      t:::::t           -:::::::::::::-      W:::::W   W:::::W:::::W   W:::::W      aaaaaaa:::::a r:::::r     r:::::r s:::::s  ssssss \\n\" +\n" +
+                    "                \"  R::::R     R:::::Ro::::o     o::::ob:::::b     b:::::bo::::o     o::::o      t:::::t           ---------------       W:::::W W:::::W W:::::W W:::::W     aa::::::::::::a r:::::r     rrrrrrr   s::::::s      \\n\" +\n" +
+                    "                \"  R::::R     R:::::Ro::::o     o::::ob:::::b     b:::::bo::::o     o::::o      t:::::t                                  W:::::W:::::W   W:::::W:::::W     a::::aaaa::::::a r:::::r                  s::::::s   \\n\" +\n" +
+                    "                \"  R::::R     R:::::Ro::::o     o::::ob:::::b     b:::::bo::::o     o::::o      t:::::t    tttttt                         W:::::::::W     W:::::::::W     a::::a    a:::::a r:::::r            ssssss   s:::::s \\n\" +\n" +
+                    "                \"RR:::::R     R:::::Ro:::::ooooo:::::ob:::::bbbbbb::::::bo:::::ooooo:::::o      t::::::tttt:::::t                          W:::::::W       W:::::::W      a::::a    a:::::a r:::::r            s:::::ssss::::::s\\n\" +\n" +
+                    "                \"R::::::R     R:::::Ro:::::::::::::::ob::::::::::::::::b o:::::::::::::::o      tt::::::::::::::t                           W:::::W         W:::::W       a:::::aaaa::::::a r:::::r            s::::::::::::::s \\n\" +\n" +
+                    "                \"R::::::R     R:::::R oo:::::::::::oo b:::::::::::::::b   oo:::::::::::oo         tt:::::::::::tt                            W:::W           W:::W         a::::::::::aa:::ar:::::r             s:::::::::::ss  \\n\" +\n" +
+                    "                \"RRRRRRRR     RRRRRRR   ooooooooooo   bbbbbbbbbbbbbbbb      ooooooooooo             ttttttttttt                               WWW             WWW           aaaaaaaaaa  aaaarrrrrrr              sssssssssss    \\n\" +\n" +
+                    "                \"                                                                                                                                                                                                               \\n\" +\n" +
+                    "                \"                                                                                                                                                                                                               \\n\" +\n" +
+                    "                \"                                                                                                                                                                                                               \\n\" +\n" +
+                    "                \"                                                                                                                                                                                                               \\n\" +\n" +
+                    "                \"                                                                                                                                                                                                               \\n\" +\n" +
+                    "                \"                                                                                                                                                                                                               \\n\" +\n" +
+                    "                \"                                                                 ";
 
-        //------------------ Player One ---------------------------
+            System.out.println(ascii);
 
-        System.out.println("Bitte geben Sie ihren Gamertag ein (Player 1): ");
-        playerOne = readIn.nextLine();
-        System.out.println("Willkommen " + playerOne + "!");
+            //------------------ Player One ---------------------------
 
-        System.out.println("Bitte gebe deinen Gamertag ein (Player 2):");
-        playerTwo = readIn.nextLine();
-        System.out.println("Willkommen " + playerTwo + "!");
+            System.out.println("Bitte geben Sie ihren Gamertag ein (Player 1): ");
+            playerOne = readIn.nextLine();
+            System.out.println("Willkommen " + playerOne + "!");
 
-        //------------------ Roboter Erstellung --------------------
+            System.out.println("Bitte gebe deinen Gamertag ein (Player 2):");
+            playerTwo = readIn.nextLine();
+            System.out.println("Willkommen " + playerTwo + "!");
 
-        System.out.println("Erstellt euren eigenen Roboter!");
+            //------------------ Roboter Erstellung --------------------
 
-        System.out.println("Gib deinem Roboter einen Namen (Player 1): ");
-        String robotNameOne = readIn.nextLine();
-        System.out.println("Hi, " + robotNameOne);
+            System.out.println("Erstellt euren eigenen Roboter!");
 
-        System.out.println("Gib deinem Roboter einen Namen (Player 2): ");
-        String robotNameTwo = readIn.nextLine();
-        System.out.println("Hi, " + robotNameTwo);
+            System.out.println("Gib deinem Roboter einen Namen (Player 1): ");
+            String robotNameOne = readIn.nextLine();
+            System.out.println("Hi, " + robotNameOne);
 
-        //------------------ Avatar / Icon -------------------------
+            System.out.println("Gib deinem Roboter einen Namen (Player 2): ");
+            String robotNameTwo = readIn.nextLine();
+            System.out.println("Hi, " + robotNameTwo);
 
-        System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
-        System.out.print("Wähle ein Icon für Player 1: ");
-        avatarIconPlayerOne = chooseAvatar(readIn.nextInt());
+            //------------------ Avatar / Icon -------------------------
 
-        System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
-        System.out.print("Wähle ein Icon für Player 2: ");
-        avatarIconPlayerTwo = chooseAvatar(readIn.nextInt());
+            System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
+            System.out.print("Wähle ein Icon für Player 1: ");
+            avatarIconPlayerOne = chooseAvatar(readIn.nextInt());
 
-        System.out.println("Avatar Spieler 1: " + avatarIconPlayerOne);
-        System.out.println("Avatar Spieler 2: " + avatarIconPlayerTwo);
+            System.out.println("1 --> %, 2 --> §, 3 --> ^, 4 --> #, 5 --> *");
+            System.out.print("Wähle ein Icon für Player 2: ");
+            avatarIconPlayerTwo = chooseAvatar(readIn.nextInt());
 
-        //------------------ Gameplay ------------------------------
+            System.out.println("Avatar Spieler 1: " + avatarIconPlayerOne);
+            System.out.println("Avatar Spieler 2: " + avatarIconPlayerTwo);
 
-        playField();
-        gameplay();
+            //------------------ Gameplay ------------------------------
 
+            playField();
+            gameplay();
+
+        }
     }
 
 
