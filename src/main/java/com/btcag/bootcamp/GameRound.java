@@ -9,6 +9,7 @@ public class GameRound {
     private Roboter playerOne;
     private Roboter playerTwo;
 
+
     public GameRound(){
 
     }
@@ -23,7 +24,12 @@ public class GameRound {
         Roboter[] player = setupPlayer(username);
         playerOne = player[0];
         playerTwo = player[1];
-        playfield = new Playfield();
+        System.out.println("1 -> #\n" +
+                "2 -> *\n" +
+                "3 -> %");
+        playerOne.getRoboterSymbol(scanner.nextInt());
+        playerTwo.getRoboterSymbol(scanner.nextInt());
+        playfield = new Playfield(Color.RESET);
         playfield.setPlayers(playerOne, playerTwo);
     }
 
@@ -46,7 +52,7 @@ public class GameRound {
                 playerOne.getDamage(damageDone);
             }
 
-            playfield.drawField("", "","","",0,0,0,0);
+            playfield.drawField("", 0,0,0,0);
             System.out.println(round + "Runde");
             round++;
         }while (!checkGameOver());

@@ -6,22 +6,26 @@ public class Playfield {
     private Roboter playerOne;
     private Roboter playerTwo;
     private boolean playerSet = false;
+    private final Color color;
 
-    public Playfield() {
+    public Playfield(Color color) {
+        this.color = color;
+
         sizeX = 15;
         sizeY = 10;
     }
 
-    public void drawField(String RESET, String RED, String BLUE, String roboterSymbol, int playerOneX, int playerOneY, int playerTwoX, int playerTwoY) {
+    public void drawField(String roboterSymbol, int playerOneX, int playerOneY, int playerTwoX, int playerTwoY) {
+
         if (playerSet) {
             int y = 0;
             while (y < sizeY) {
                 int x = 0;
                 while (x < sizeX) {
                     if (playerOne.checkPosition(x, y)) {
-                        System.out.print(RED + "[" + RESET + RED + playerOne.roboterSymbol() + RESET + RED + "]" + RESET);
+                        System.out.print(Color.RED + "[" + Color.RESET + Color.RED + playerOne.roboterSymbol + Color.RESET + Color.RED + "]" + Color.RESET);
                     } else if (playerTwo.checkPosition(x, y)) {
-                        System.out.print(BLUE + "[" + RESET + BLUE + playerTwo.roboterSymbol() + RESET + BLUE + "]" + RESET);
+                        System.out.print(Color.BLUE + "[" + Color.RESET + Color.BLUE + playerTwo.roboterSymbol + Color.RESET + Color.BLUE + "]" + Color.RESET);
                     }
                     else {
                         System.out.print("[ ]");

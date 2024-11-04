@@ -35,6 +35,7 @@ public class Roboter {
         this.BLUE = "\u001B[34m";
     }
 
+
     public int getPositionX(){
         return x;
     }
@@ -43,7 +44,18 @@ public class Roboter {
         return y;
     }
 
-    public String getRoboterSymbol(){
+    public String getRoboterSymbol(int userInput){
+        switch (userInput){
+            case 1 ->{
+                roboterSymbol = "#";
+            }
+            case 2 ->{
+                roboterSymbol = "*";
+            }
+            case 3 ->{
+                roboterSymbol ="%";
+            }
+        }
         return  roboterSymbol;
     }
 
