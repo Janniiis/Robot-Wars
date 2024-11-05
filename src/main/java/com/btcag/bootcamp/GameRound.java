@@ -35,8 +35,8 @@ public class GameRound {
 
     private Roboter[] setupPlayer(String username){
         Roboter[] players = new Roboter[2];
-        players[0] = new Roboter(7,9,username,"*");
-        players[1] = new Roboter(7,0,"enemy","#");
+        players[0] = new Roboter(7, 9, 1, username, "*");
+        players[1] = new Roboter(7,0,1,"enemy","#");
         return players;
     }
 

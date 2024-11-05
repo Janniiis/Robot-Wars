@@ -90,80 +90,28 @@ public class Roboter {
     public void move(String direction){
         switch (direction){
             case "w" ->{
-                if (y > 0) {
-                    y--;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveTop();
             }
             case "q" ->{
-                if (y > 0 && x > 0) {
-                    y--;
-                    x--;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveTopLeft();
             }
             case "e" ->{
-                if (y > 0 && x < 15) {
-                    y--;
-                    x++;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveTopRight();
             }
             case "y" ->{
-                if (y < 15 && x < 0) {
-                    y++;
-                    x--;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveBottomLeft();
             }
             case "c" ->{
-                if (y < 15 && x < 15) {
-                    y++;
-                    x++;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveBottomRight();
             }
             case "a" ->{
-                if (x > 0) {
-                    x--;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveLeft();
             }
             case "x" ->{
-                if (y < 15) {
-                    y++;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveBottom();
             }
             case "d" ->{
-                if (x < 15) {
-                    x++;
-                }
-                else {
-                    System.out.println("Invalider Spielzug, versuche es erneut!");
-                    return;
-                }
+                Movement.moveRight();
             }
         }
     }

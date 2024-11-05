@@ -11,11 +11,17 @@ public class Movement {
             Roboter.x -= Roboter.movementSpeed;
             Roboter.y -= Roboter.movementSpeed;
         }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
+        }
     }
 
     public static void moveTop(){
         if (Roboter.y > 0){
             Roboter.y -= Roboter.movementSpeed;
+        }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
         }
     }
 
@@ -24,17 +30,26 @@ public class Movement {
             Roboter.x += Roboter.movementSpeed;
             Roboter.y -= Roboter.movementSpeed;
         }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
+        }
     }
 
     public static void moveLeft(){
         if (Roboter.x > 0){
             Roboter.x -= Roboter.movementSpeed;
         }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
+        }
     }
 
     public static void moveRight(){
         if (Roboter.x < 15){
             Roboter.x += Roboter.movementSpeed;
+        }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
         }
     }
 
@@ -43,11 +58,18 @@ public class Movement {
             Roboter.x -= Roboter.movementSpeed;
             Roboter.y += Roboter.movementSpeed;
         }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
+        }
+
     }
 
     public static void moveBottom(){
         if (Roboter.y < 15){
             Roboter.y += Roboter.movementSpeed;
+        }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
         }
     }
 
@@ -55,6 +77,9 @@ public class Movement {
         if (Roboter.y < 15 && Roboter.x < 15){
             Roboter.x += Roboter.movementSpeed;
             Roboter.y += Roboter.movementSpeed;
+        }
+        else {
+            System.out.println("Invalider Spielzug, versuche erneut!");
         }
     }
 
