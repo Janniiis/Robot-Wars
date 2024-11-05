@@ -10,16 +10,16 @@ public class Roboter {
     int range;
     int damageZone;
     int accuracy;
-    int movementSpeed;
-    int x;
-    int y;
+    static int movementSpeed;
+    static int x;
+    static int y;
     String username;
     String roboterSymbol;
     String RESET;
     String RED;
     String BLUE;
 
-    public Roboter(int x, int y, String username, String roboterSymbol) {
+    public Roboter(int x, int y, int movementSpeed, String username, String roboterSymbol) {
         this.hp = 1;
         this.energy = 1;
         this.shield = 1;
@@ -42,6 +42,34 @@ public class Roboter {
 
     public int getPositionY(){
         return y;
+    }
+
+    public int getEnergy(){
+        return energy;
+    }
+
+    public int getShield(){
+        return shield;
+    }
+
+    public int getAccuracy() {
+        return accuracy;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public int getDamageZone() {
+        return damageZone;
+    }
+
+    public int getRange() {
+        return range;
     }
 
     public String getRoboterSymbol(int userInput){
