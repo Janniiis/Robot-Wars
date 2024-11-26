@@ -4,7 +4,9 @@ import java.awt.*;
 
 public class Movement {
 
-    Roboter roboter = new Roboter(0, 0, 0,null, null);
+    private static final String endOfMovement = "Invalider Spielzug, versuche es erneut!";
+
+    Roboter roboter = new Roboter(0, 0, 0,null, null, 1, 1, 1, 1, 1, 1);
 
     public static void moveTopLeft(){
         if (Roboter.y > 0 && Roboter.x > 0){
@@ -12,7 +14,7 @@ public class Movement {
             Roboter.y -= Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 
@@ -21,7 +23,7 @@ public class Movement {
             Roboter.y -= Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 
@@ -31,7 +33,7 @@ public class Movement {
             Roboter.y -= Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 
@@ -40,7 +42,7 @@ public class Movement {
             Roboter.x -= Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 
@@ -49,7 +51,7 @@ public class Movement {
             Roboter.x += Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 
@@ -59,7 +61,7 @@ public class Movement {
             Roboter.y += Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
 
     }
@@ -69,7 +71,7 @@ public class Movement {
             Roboter.y += Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 
@@ -79,7 +81,7 @@ public class Movement {
             Roboter.y += Roboter.movementSpeed;
         }
         else {
-            System.out.println("Invalider Spielzug, versuche erneut!");
+            System.out.println(endOfMovement);
         }
     }
 

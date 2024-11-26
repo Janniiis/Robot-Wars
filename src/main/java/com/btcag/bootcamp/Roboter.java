@@ -14,12 +14,12 @@ public class Roboter {
     static int x;
     static int y;
     String username;
-    String roboterSymbol;
+    static String roboterSymbol;
     String RESET;
     String RED;
     String BLUE;
 
-    public Roboter(int x, int y, int movementSpeed, String username, String roboterSymbol) {
+    public Roboter(int x, int y, int movementSpeed, String username, String roboterSymbol, int hp, int energy, int shield, int damage, int range, int damageZone) {
         this.hp = 1;
         this.energy = 1;
         this.shield = 1;
@@ -145,7 +145,7 @@ public class Roboter {
         return scanner.nextLine();
     }
 
-    public boolean checkPosition(int i, int j){
+    public static boolean checkPosition(int i, int j){
         return x == i && y == j;
     }
 

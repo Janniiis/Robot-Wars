@@ -1,4 +1,4 @@
-package com.btcag.bootcamp;
+/*package com.btcag.bootcamp;
 
 import java.awt.*;
 import java.sql.SQLOutput;
@@ -8,25 +8,45 @@ public class GameRound {
     private Playfield playfield;
     private Roboter playerOne;
     private Roboter playerTwo;
-
+    int select;
 
     public GameRound(){
 
     }
 
+
+
+    public void skillManager(int select){
+        switch (select){
+            case 1 -> {
+
+            }
+            case 2 -> {
+
+            }
+
+        }
+    }
+
     public void startRound(){
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("");
 
         String username;
         System.out.println("Bitte geben Sie einen Username an: ");
         username = scanner.nextLine();
+
         Roboter[] player = setupPlayer(username);
         playerOne = player[0];
         playerTwo = player[1];
-        System.out.println("1 -> #\n" +
+
+
+        System.out.println(
+                "1 -> #\n" +
                 "2 -> *\n" +
                 "3 -> %");
+
         playerOne.getRoboterSymbol(scanner.nextInt());
         playerTwo.getRoboterSymbol(scanner.nextInt());
         playfield = new Playfield(Color.RESET);
@@ -35,8 +55,8 @@ public class GameRound {
 
     private Roboter[] setupPlayer(String username){
         Roboter[] players = new Roboter[2];
-        players[0] = new Roboter(7, 9, 1, username, "*");
-        players[1] = new Roboter(7,0,1,"enemy","#");
+        players[0] = new Roboter(7, 9, 1, username, null);
+        players[1] = new Roboter(7,0,1,"enemy",null);
         return players;
     }
 
@@ -62,3 +82,4 @@ public class GameRound {
         return playerOne.getHp() == 0 || playerTwo.getHp() == 0;
     }
 }
+*/

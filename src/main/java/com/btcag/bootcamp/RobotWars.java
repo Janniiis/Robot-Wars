@@ -1,4 +1,4 @@
-package com.btcag.bootcamp;
+/*package com.btcag.bootcamp;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -11,3 +11,4 @@ public class RobotWars {
         newGameRound.mainGame();
     }
 }
+*/
