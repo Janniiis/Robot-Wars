@@ -8,7 +8,9 @@ public class MoveRobotView {
     public static Directions display() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
+                «--------------------------------------------------------------»
                 Bitte wähle eine Richtung in die sich dein Roboter bewegen soll:
+                
                 [w] Oben
                 [s] unten
                 [a] links
@@ -17,6 +19,8 @@ public class MoveRobotView {
                 [e] oben-rechts
                 [y] unten-links
                 [c] unten-rechts
+                
+                «--------------------------------------------------------------»
                 """);
 
 

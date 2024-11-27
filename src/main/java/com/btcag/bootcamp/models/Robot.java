@@ -5,12 +5,17 @@ public class Robot {
     private int roboterPositionX;
     private int roboterPositionY;
     private final char roboterSymbol;
+    private static int hp;
 
     public Robot(String name, int x, int y, char roboterSymbol) {
         this.name = name;
         this.roboterPositionX = roboterPositionX;
         this.roboterPositionY = roboterPositionY;
         this.roboterSymbol = roboterSymbol;
+    }
+
+    public int getHp(){
+        return hp;
     }
 
     public int getRoboterPositionX() {

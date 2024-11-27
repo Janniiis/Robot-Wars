@@ -27,12 +27,7 @@ public class Battlefield {
         return x > 0 && x <= width && y > 0 && y <= height;
     }
 
-    private void initializeMap() {
-        BattlefieldView.printHeaderRow(width);
-        BattlefieldView.printMainRow(width, height);
-        BattlefieldView.printBottomRow(width);
-    }
-
     public void setField(int roboterPositionX, int roboterPositionY, char roboterSymbol) {
+
     }
 }
