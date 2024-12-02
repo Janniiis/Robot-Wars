@@ -25,16 +25,16 @@ public class AskForSkillPoints {
 
 
             if (choice == 1) {
-                robot.setMovementRange(displayAmount());
+                robot.setMovementRange(temp);
                 skillpoints-=temp;
             } else if (choice == 2) {
-                robot.setAttackDamage(displayAmount());
+                robot.setAttackDamage(temp);
                 skillpoints-=temp;
             } else if (choice == 3) {
-                robot.setHp(displayAmount());
+                robot.setHp(temp);
                 skillpoints-=temp;
             } else if (choice == 4) {
-                robot.setAttackRange(displayAmount());
+                robot.setAttackRange(temp);
                 skillpoints-=temp;
             } else {
                 System.out.println("Ungültige auswahl");
