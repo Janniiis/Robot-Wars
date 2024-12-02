@@ -5,17 +5,46 @@ public class Robot {
     private int roboterPositionX;
     private int roboterPositionY;
     private final char roboterSymbol;
-    private static int hp;
+    private int hp;
+    private int movementRange;
+    private int attackDamage;
+    private int attackRange;
 
-    public Robot(String name, int x, int y, char roboterSymbol) {
+    public Robot(String name, int x, int y, char roboterSymbol, int hp, int movementRange, int attackDamage, int attackRange) {
         this.name = name;
-        this.roboterPositionX = roboterPositionX;
-        this.roboterPositionY = roboterPositionY;
         this.roboterSymbol = roboterSymbol;
+    }
+
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+
+    public void setAttackDamage(int attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+
+    public void setMovementRange(int movementRange) {
+        this.movementRange = movementRange;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     public int getHp(){
         return hp;
+    }
+
+    public int getMovementRange(){
+        return movementRange;
+    }
+
+    public int getAttackDamage(){
+        return attackDamage;
+    }
+
+    public int getAttackRange(){
+        return attackRange;
     }
 
     public int getRoboterPositionX() {

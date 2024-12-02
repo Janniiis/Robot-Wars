@@ -52,8 +52,7 @@ public class AskForSkillPoints {
                 «-----------------------------------------------»
                 """);
 
-        int temp = readIn.nextInt();
-        return  temp;
+         return readIn.nextInt();
     }
 
     public static void displayStats(Robot robot){
