@@ -44,14 +44,6 @@ public class Battlefield {
         }
     }
 
-    public void placeItem(int x, int y, char item){
-        if (y >= 0 && y < height && x >= 0 && x < width) {
-            board[y][x] = item;
-        } else {
-            System.out.println("Koordinate außerhalb des Spielfelds.");
-        }
-    }
-
     public void printBoard() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

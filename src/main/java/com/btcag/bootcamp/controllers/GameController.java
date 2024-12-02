@@ -30,10 +30,13 @@ public class GameController {
         Random random = new Random();
         board.placeSymbol(0, 0, robot.getRoboterSymbol());
         board.placeSymbol(9, 14, robot2.getRoboterSymbol());
-        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
-        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
-        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
-        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
+        board.placeSymbol(random.nextInt(9), random.nextInt(14), '?');
+        board.placeSymbol(random.nextInt(9), random.nextInt(14), '?');
+        board.placeSymbol(random.nextInt(9), random.nextInt(14), '?');
+        board.placeSymbol(random.nextInt(9), random.nextInt(14), '?');
+        board.placeSymbol(random.nextInt(9), random.nextInt(14), 'x');
+        board.placeSymbol(random.nextInt(9), random.nextInt(14), 'x');
+
         board.printBoard();
 
         int playMove;
