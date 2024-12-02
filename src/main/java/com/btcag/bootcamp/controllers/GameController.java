@@ -5,6 +5,9 @@ import com.btcag.bootcamp.enums.*;
 import com.btcag.bootcamp.views.*;
 import com.btcag.bootcamp.services.*;
 
+import java.util.Random;
+import java.util.random.*;
+
 public class GameController {
 
     public static void main(String[] args) {
@@ -24,8 +27,13 @@ public class GameController {
         AskForSkillPoints.displayStats(robot2);
 
         Battlefield board = new Battlefield(10, 15);
+        Random random = new Random();
         board.placeSymbol(0, 0, robot.getRoboterSymbol());
         board.placeSymbol(9, 14, robot2.getRoboterSymbol());
+        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
+        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
+        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
+        board.placeItem(random.nextInt(9), random.nextInt(14), '?');
         board.printBoard();
 
         int playMove;
@@ -56,13 +64,14 @@ public class GameController {
                     } while (!board.isValidField(newX, newY));
 
 
-                    robot.setPosition(newX, newY);
+                    board.placeSymbol(newX, newY, robot.getRoboterSymbol());
 
 
 
                 } else {
                     System.out.println("fehler");
                 }
+                board.printBoard();
 
 
             } else {
@@ -86,12 +95,12 @@ public class GameController {
                     } while (!board.isValidField(new_X, new_Y));
 
 
-                    robot2.setPosition(new_X, new_Y);
+                    board.placeSymbol(new_X, new_Y, robot2.getRoboterSymbol());
 
-
-
-
+                } else {
+                    System.out.println("fehler");
                 }
+                board.printBoard();
 
 
             }
