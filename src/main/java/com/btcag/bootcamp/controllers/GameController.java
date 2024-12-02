@@ -23,8 +23,10 @@ public class GameController {
         AskForSkillPoints.display(robot2);
         AskForSkillPoints.displayStats(robot2);
 
-        Battlefield battlefield = new Battlefield(10, 15);
-        Battlefield.display(battlefield, robot, robot2);
+        Battlefield board = new Battlefield(10, 15);
+        board.placeSymbol(0, 0, robot.getRoboterSymbol());
+        board.placeSymbol(9, 14, robot2.getRoboterSymbol());
+        board.printBoard();
 
         int playMove;
         int newX;
@@ -51,13 +53,13 @@ public class GameController {
                         newX = robot.getRoboterPositionX() + direction.getX();
                         newY = robot.getRoboterPositionY() + direction.getY();
 
-                    } while (!battlefield.isValidField(newX, newY));
+                    } while (!board.isValidField(newX, newY));
 
-                    battlefield.setField(robot.getRoboterPositionX(), robot.getRoboterPositionY(), '☼');
+
                     robot.setPosition(newX, newY);
-                    battlefield.setField(robot.getRoboterPositionX(), robot.getRoboterPositionY(), robot.getRoboterSymbol());
 
-                    Battlefield.display(battlefield, robot, robot2);
+
+
                 } else {
                     System.out.println("fehler");
                 }
@@ -81,13 +83,13 @@ public class GameController {
                         new_X = robot2.getRoboterPositionX() + direction.getX();
                         new_Y = robot2.getRoboterPositionY() + direction.getY();
 
-                    } while (!battlefield.isValidField(new_X, new_Y));
+                    } while (!board.isValidField(new_X, new_Y));
 
-                    battlefield.setField(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), '♣');
+
                     robot2.setPosition(new_X, new_Y);
-                    battlefield.setField(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), robot2.getRoboterSymbol());
 
-                    Battlefield.display(battlefield, robot, robot2);
+
+
 
                 }
 

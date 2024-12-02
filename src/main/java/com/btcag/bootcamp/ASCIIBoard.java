@@ -1,31 +1,15 @@
-package com.btcag.bootcamp.models;
+package com.btcag.bootcamp;
 
-import com.btcag.bootcamp.ASCIIBoard;
-
-public class Battlefield {
-    private static int width = 10;
-    private static int height = 15;
+public class ASCIIBoard {
+    private int height;
+    private int width;
     private char[][] board;
 
-
-    public Battlefield(int width, int height) {
-        this.width = width;
+    public ASCIIBoard(int height, int width) {
         this.height = height;
+        this.width = width;
         board = new char[height][width];
         initializeBoard();
-
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public boolean isValidField(int x, int y) {
-        return x > 0 && x <= width && y > 0 && y <= height;
     }
 
     private void initializeBoard() {
@@ -37,8 +21,8 @@ public class Battlefield {
     }
 
     public void placeSymbol(int x, int y, char symbol) {
-        if (y >= 0 && y < height && x >= 0 && x < width) {
-            board[y][x] = symbol;
+        if (x >= 0 && x < height && y >= 0 && y < width) {
+            board[x][y] = symbol;
         } else {
             System.out.println("Koordinate außerhalb des Spielfelds.");
         }
@@ -52,4 +36,12 @@ public class Battlefield {
             System.out.println();
         }
     }
+
+    public static void main(String[] args) {
+        ASCIIBoard board = new ASCIIBoard(10, 15);
+        board.placeSymbol(2, 3, 'X');
+        board.placeSymbol(5, 7, 'O');
+        board.printBoard();
+    }
 }
+
