@@ -15,15 +15,15 @@ public class GameController {
 
         // Erstellung Spieler 1
         String robotName = AskForRobotNameView.display();
-        Robot robot = new Robot(robotName, 7, 0, '☼', 1, 1, 1, 1);
-        RobotView.display(robot);
+        Robot robot = new Robot(robotName, 0, 0, '☼', 1, 1, 1, 1);
+        RobotView.display1(robot);
         AskForSkillPoints.display(robot);
         AskForSkillPoints.displayStats(robot);
 
         // Erstellung Spieler 2
         String robotNameP2 = AskForRobotNameView.display();
-        Robot robot2 = new Robot(robotNameP2, 7, 14, '♣', 1, 1, 1, 1);
-        RobotView.display(robot2);
+        Robot robot2 = new Robot(robotNameP2, 9, 14, '♣', 1, 1, 1, 1);
+        RobotView.display2(robot2);
         AskForSkillPoints.display(robot2);
         AskForSkillPoints.displayStats(robot2);
 
@@ -44,8 +44,8 @@ public class GameController {
         String blueValue = Colors.BLUE.getValue();
         String resetValue = Colors.RESET.getValue();
         Battlefield board = new Battlefield(10, 15);
-        board.placeSymbol(0, 0, robot.getRoboterSymbol());
-        board.placeSymbol(9, 14, robot2.getRoboterSymbol());
+        board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), robot.getRoboterSymbol());
+        board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), robot2.getRoboterSymbol());
         board.placeSymbol(items.getItemPositionX(), items.getItemPositionY(), '�');
         board.placeSymbol(items1.getItemPositionX(), items1.getItemPositionY(), '�');
         board.placeSymbol(items2.getItemPositionX(), items2.getItemPositionY(), '�');
@@ -67,8 +67,8 @@ public class GameController {
             int new_Y;
 
             // Zug - Spieler 1
-            if (RobotService.checkPlayerTurn(robot, robot2) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot, obstacle, obstacle1)) {
-                playMove = AskForActionView.display();
+            if (RobotService.checkPlayerTurn(robot, robot2) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1)) {
+                playMove = AskForActionView.displayPlayerOne(robot);
                 if (playMove == 1) {
                     if (RobotService.checkIfPlayerInRange(robot, robot2)) {
                         int tempHp = robot2.getHp();
@@ -85,7 +85,7 @@ public class GameController {
                         newX = robot.getRoboterPositionX() + direction.getX();
                         newY = robot.getRoboterPositionY() + direction.getY();
 
-                    } while (!board.isValidField(newX, newY) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot, obstacle, obstacle1));
+                    } while (!board.isValidField(newX, newY) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1));
 
                     // Items
                     if(RobotService.CheckIfPlayerCollectsItem(robot, robot2, items, items1, items2)){
@@ -94,17 +94,17 @@ public class GameController {
                         switch (randomEffect) {
                             case 0:
                                 int temp = robot.getAttackDamage();
-                                temp *= items.getItemEffect();
+                                temp += items.getItemEffect();
                                 robot.setAttackDamage(temp);
                                 break;
                             case 1:
                                 int temp1 = robot.getAttackRange();
-                                temp1 *= items.getItemEffect();
+                                temp1 += items.getItemEffect();
                                 robot.setAttackRange(temp1);
                                 break;
                             case 2:
                                 int temp2 = robot.getMovementRange();
-                                temp2 *= items.getItemEffect();
+                                temp2 += items.getItemEffect();
                                 robot.setMovementRange(temp2);
                                 break;
                             default:
@@ -112,8 +112,9 @@ public class GameController {
 
                         }
                     };
+                    robot.setPosition(newX, newY);
+                    board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), robot.getRoboterSymbol());
 
-                    board.placeSymbol(newX, newY, robot.getRoboterSymbol());
 
 
 
@@ -126,9 +127,9 @@ public class GameController {
 
             // Zug - Spieler 2
             } else {
-                playMove = AskForActionView.display();
+                playMove = AskForActionView.displayPlayerTwo(robot2);
                 if (playMove == 1) {
-                    if (RobotService.checkIfPlayerInRange(robot, robot2) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot, obstacle, obstacle1)) {
+                    if (RobotService.checkIfPlayerInRange(robot, robot2) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1)) {
                         int tempHp = robot.getHp();
                         tempHp -= robot2.getAttackDamage();
                         robot.setHp(tempHp);
@@ -143,7 +144,7 @@ public class GameController {
                         new_X = robot2.getRoboterPositionX() + direction.getX();
                         new_Y = robot2.getRoboterPositionY() + direction.getY();
 
-                    } while (!board.isValidField(new_X, new_Y) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot, obstacle, obstacle1));
+                    } while (!board.isValidField(new_X, new_Y) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1));
 
                     // Items
                     if(RobotService.CheckIfPlayerCollectsItem(robot, robot2, items, items1, items2)){
@@ -173,6 +174,7 @@ public class GameController {
 
 
                     board.placeSymbol(new_X, new_Y, robot2.getRoboterSymbol());
+                    robot2.setPosition(new_X, new_Y);
 
                 } else {
                     System.out.println("fehler");
