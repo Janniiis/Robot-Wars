@@ -112,6 +112,7 @@ public class GameController {
 
                         }
                     };
+                    board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), '.');
                     robot.setPosition(newX, newY);
                     board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), robot.getRoboterSymbol());
 
@@ -172,9 +173,9 @@ public class GameController {
                         }
                     };
 
-
-                    board.placeSymbol(new_X, new_Y, robot2.getRoboterSymbol());
+                    board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), '.');
                     robot2.setPosition(new_X, new_Y);
+                    board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), robot2.getRoboterSymbol());
 
                 } else {
                     System.out.println("fehler");

@@ -13,7 +13,6 @@ public class Battlefield {
         this.height = height;
         board = new char[height][width];
         initializeBoard();
-
     }
 
     public int getWidth() {
@@ -45,11 +44,13 @@ public class Battlefield {
     }
 
     public void printBoard() {
+        System.out.println("Spieler 1");
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 System.out.print(board[i][j] + " ");
             }
             System.out.println();
         }
+        System.out.println("Spieler 2");
     }
 }
