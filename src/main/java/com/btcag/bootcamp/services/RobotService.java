@@ -50,10 +50,32 @@ public class RobotService {
     }
 
     public static boolean checkIfPlayerCrossesObstacle(Robot robot, Robot robot2, Obstacle obstacle, Obstacle obstacle2){
-        if(robot.getRoboterPositionX() == obstacle.getObstaclePositionX() && robot.getRoboterPositionY() == obstacle.getObstaclePositionY() ||
-        robot.getRoboterPositionX() == obstacle2.getObstaclePositionX() && robot.getRoboterPositionY() == obstacle2.getObstaclePositionY() ||
-        robot2.getRoboterPositionX() == obstacle.getObstaclePositionX() && robot2.getRoboterPositionY() == obstacle.getObstaclePositionY() ||
-        robot2.getRoboterPositionX() == obstacle2.getObstaclePositionX() && robot2.getRoboterPositionY() == obstacle2.getObstaclePositionY()){
+        if(robot.getRoboterPositionX()  == obstacle.getObstaclePositionX() && robot.getRoboterPositionY() == obstacle.getObstaclePositionY() ||
+        robot.getRoboterPositionX()  == obstacle2.getObstaclePositionX() && robot.getRoboterPositionY() == obstacle2.getObstaclePositionY() ||
+        robot2.getRoboterPositionX() == obstacle.getObstaclePositionX() && robot2.getRoboterPositionY()  == obstacle.getObstaclePositionY() ||
+        robot2.getRoboterPositionX()  == obstacle2.getObstaclePositionX() && robot2.getRoboterPositionY() == obstacle2.getObstaclePositionY()){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkIfRobot2IsInDiagonalFOV(Robot robot, Robot robot2){
+        int valueOne;
+        int valueTwo;
+        valueOne = robot2.getRoboterPositionX() - robot.getRoboterPositionX();
+        valueTwo = robot2.getRoboterPositionY() - robot.getRoboterPositionY();
+        if (Math.abs(valueOne) == Math.abs(valueTwo)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkIfRobot1IsInDiagonalFOV(Robot robot, Robot robot2){
+        int valueOne;
+        int valueTwo;
+        valueOne = robot.getRoboterPositionX() - robot2.getRoboterPositionX();
+        valueTwo = robot.getRoboterPositionY() - robot2.getRoboterPositionY();
+        if (Math.abs(valueOne) == Math.abs(valueTwo)) {
             return true;
         }
         return false;

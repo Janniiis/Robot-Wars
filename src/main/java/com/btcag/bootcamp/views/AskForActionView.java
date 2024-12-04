@@ -13,6 +13,7 @@ public class AskForActionView {
                 Wähle eine aktion:
                 [1] Angreifen
                 [2] Bewegen
+                [3] Ausrichten
                 «--------------------»
                 """);
         return readIn.nextInt();
@@ -26,6 +27,7 @@ public class AskForActionView {
                 Wähle eine aktion:
                 [1] Angreifen
                 [2] Bewegen
+                [3] Ausrichten
                 «--------------------»
                 """);
         return readIn.nextInt();
