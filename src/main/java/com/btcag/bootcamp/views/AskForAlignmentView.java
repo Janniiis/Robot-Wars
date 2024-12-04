@@ -1,5 +1,6 @@
 package com.btcag.bootcamp.views;
 
+import com.btcag.bootcamp.enums.Alignments;
 import com.btcag.bootcamp.enums.Directions;
 
 import java.util.Scanner;
@@ -23,8 +24,14 @@ public class AskForAlignmentView {
                 «--------------------------------------------------------------»
                 """);
 
-        String temp = scanner.nextLine();
-        return temp;
+        Alignments alignments;
+        do {
+            alignments = Alignments.fromUserInput(
+                    scanner.next().toLowerCase().charAt(0)
+            );
+        } while (null == alignments);
+        return alignments.toString();
     }
 }
+
 
