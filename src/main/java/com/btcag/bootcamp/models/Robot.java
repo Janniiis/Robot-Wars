@@ -9,14 +9,26 @@ public class Robot {
     private int movementRange;
     private int attackDamage;
     private int attackRange;
+    private String alignment;
 
-    public Robot(String name, int x, int y, char roboterSymbol, int hp, int movementRange, int attackDamage, int attackRange) {
+    public Robot(String name, int x, int y, char roboterSymbol, int hp, int movementRange, int attackDamage, int attackRange, String alignment) {
+        this.alignment = alignment;
         this.name = name;
         this.roboterSymbol = roboterSymbol;
+        this.hp = hp;
+        this.movementRange = movementRange;
+        this.roboterPositionX = x;
+        this.roboterPositionY = y;
+        this.attackDamage = attackDamage;
+        this.attackRange = attackRange;
     }
 
     public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;
+    }
+
+    public void setAlignment(String alignment) {
+        this.alignment = alignment;
     }
 
     public void setAttackDamage(int attackDamage) {
@@ -61,6 +73,10 @@ public class Robot {
 
     public String getName() {
         return name;
+    }
+
+    public String getAlignment() {
+        return alignment;
     }
 
     public void setPosition(int roboterPositionX, int roboterPositionY) {

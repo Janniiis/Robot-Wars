@@ -11,6 +11,7 @@ public class AskForSkillPoints {
         while (skillpoints > 0){
             System.out.println("Du hast noch " + skillpoints + " skillpunkte.");
             System.out.println("""
+                
                 Bitte wähle erst aus welche fähigkeit du leveln möchtest,
                 anschließen wie viele Skillpunkte du verteilen willst.
                 
@@ -18,6 +19,7 @@ public class AskForSkillPoints {
                 [2] - Damage
                 [3] - Health
                 [4] - Range
+                
                 «-----------------------------------------------»
                 """);
         int choice = readIn.nextInt();
@@ -47,8 +49,10 @@ public class AskForSkillPoints {
         Scanner readIn = new Scanner(System.in);
         System.out.println("""
                 «-----------------------------------------------»
+                
                 Wie viele Skillpunkte möchtest du vergeben,
                 du hast 10 zum verteilen. [1-10]
+                
                 «-----------------------------------------------»
                 """);
 
@@ -56,12 +60,12 @@ public class AskForSkillPoints {
     }
 
     public static void displayStats(Robot robot){
-        System.out.println("«-----------------------------------------------»\n"  +
+        System.out.println("«-----------------------------------------------»\n\n"  +
                 "Du hast folgende Skillpunkte verteilt: "+
                 "\nHealthpoints: " + robot.getHp()+
                 "\nDamage: " + robot.getAttackDamage() +
                 "\nRange: " + robot.getAttackRange() +
                 "\nBewegunsrate: " + robot.getMovementRange()+
-                "\n«-----------------------------------------------»");
+                "\n\n«-----------------------------------------------»");
     }
 }

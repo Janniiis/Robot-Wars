@@ -4,10 +4,10 @@ public class Items {
     private final String itemName;
     private final int itemPositionX;
     private final int itemPositionY;
-    private final double itemEffect;
+    private final int itemEffect;
     private final int itemDurability;
 
-    public Items(String itemName, int itemPositionX, int itemPositionY, double itemEffect, int itemDurability) {
+    public Items(String itemName, int itemPositionX, int itemPositionY, int itemEffect, int itemDurability) {
         this.itemName = itemName;
         this.itemPositionX = itemPositionX;
         this.itemPositionY = itemPositionY;

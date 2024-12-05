@@ -36,8 +36,11 @@ public class GameController {
         Items items2 = new Items("Movement", random.nextInt(9), random.nextInt(14), random.nextInt(-2, 2), random.nextInt(2));
 
         // Obstacles
-        Obstacle obstacle = new Obstacle(random.nextInt(2, 7), random.nextInt(2, 13));
-        Obstacle obstacle1 = new Obstacle(random.nextInt(2, 7), random.nextInt(2, 13));
+        Obstacle[] obstacles = new Obstacle[5];
+
+        for (int i = 0; i < obstacles.length; i++) {
+            obstacles[i] = new Obstacle(random.nextInt(3, 7), random.nextInt(3, 12));
+        }
 
         // Spielfeld (Grafisch)
         String redValue = Colors.RED.getValue();
@@ -49,8 +52,9 @@ public class GameController {
         board.placeSymbol(items.getItemPositionX(), items.getItemPositionY(), '�');
         board.placeSymbol(items1.getItemPositionX(), items1.getItemPositionY(), '�');
         board.placeSymbol(items2.getItemPositionX(), items2.getItemPositionY(), '�');
-        board.placeSymbol(obstacle.getObstaclePositionX(), obstacle.getObstaclePositionY(), '■');
-        board.placeSymbol(obstacle1.getObstaclePositionX(), obstacle1.getObstaclePositionY(), '■');
+        for (Obstacle obstacle : obstacles) {
+            board.placeSymbol(obstacle.getObstaclePositionX(), obstacle.getObstaclePositionY(), '■');
+        }
         board.printBoard();
 
 
@@ -65,10 +69,10 @@ public class GameController {
             int new_Y;
 
             // Zug - Spieler 1
-            if (RobotService.checkPlayerTurn(robot, robot2) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1)) {
+            if (RobotService.checkPlayerTurn(robot, robot2)) {
                 playMove = AskForActionView.displayPlayerOne(robot);
                 if (playMove == 1) {
-                    if (RobotService.checkIfRobot2IsInDiagonalFOV(robot, robot2) && RobotService.checkIfPlayerInRange(robot, robot2)) {
+                    if (RobotService.checkIfRobotIsInDiagonalFOV(robot2, robot) || RobotService.checkIfRobotIsInHorizontalFOV(robot, robot2) || RobotService.checkIfRobotIsInVerticalFOV(robot, robot2) && RobotService.checkIfPlayerInRange(robot, robot2)) {
                         int tempHp = robot2.getHp();
                         tempHp -= robot.getAttackDamage();
                         robot2.setHp(tempHp);
@@ -83,7 +87,7 @@ public class GameController {
                         newX = robot.getRoboterPositionX() + direction.getX();
                         newY = robot.getRoboterPositionY() + direction.getY();
 
-                    } while (!board.isValidField(newX, newY) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1));
+                    } while (!board.isValidField(newX, newY, obstacles));
 
                     // Items
                     if (RobotService.CheckIfPlayerCollectsItem(robot, robot2, items, items1, items2)) {
@@ -120,23 +124,20 @@ public class GameController {
 
                 } else if (playMove == 3) {
                     robot.setAlignment(AskForAlignmentView.display());
-                    System.out.println(robot2.getAlignment());
-                    int temp = robot.getMovementRange();
-                    temp--;
-                    robot.setMovementRange(temp);
-
+                    robot.setMovementRange(robot.getMovementRange() - 1);
                 } else {
                     System.out.println("fehler");
                 }
 
                 board.printBoard();
+                System.out.println(robot.getAlignment());
 
 
                 // Zug - Spieler 2
             } else {
                 playMove = AskForActionView.displayPlayerTwo(robot2);
                 if (playMove == 1) {
-                    if (RobotService.checkIfRobot1IsInDiagonalFOV(robot, robot2) && RobotService.checkIfPlayerInRange(robot, robot2)) {
+                    if (RobotService.checkIfRobotIsInDiagonalFOV(robot2, robot) || RobotService.checkIfRobotIsInHorizontalFOV(robot2, robot) || RobotService.checkIfRobotIsInVerticalFOV(robot2, robot) && RobotService.checkIfPlayerInRange(robot, robot2)) {
                         int tempHp = robot.getHp();
                         tempHp -= robot2.getAttackDamage();
                         robot.setHp(tempHp);
@@ -151,7 +152,7 @@ public class GameController {
                         new_X = robot2.getRoboterPositionX() + direction.getX();
                         new_Y = robot2.getRoboterPositionY() + direction.getY();
 
-                    } while (!board.isValidField(new_X, new_Y) && !RobotService.checkIfPlayerCrossesObstacle(robot, robot2, obstacle, obstacle1));
+                    } while (!board.isValidField(new_X, new_Y, obstacles));
 
                     // Items
                     if (RobotService.CheckIfPlayerCollectsItem(robot, robot2, items, items1, items2)) {
@@ -186,14 +187,12 @@ public class GameController {
 
                 } else if (playMove == 3) {
                     robot2.setAlignment(AskForAlignmentView.display());
-                    System.out.println(robot2.getAlignment());
-                    int temp = robot2.getMovementRange();
-                    temp--;
-                    robot2.setMovementRange(temp);
+                    robot2.setMovementRange(robot2.getMovementRange() - 1);
                 } else {
                     System.out.println("fehler");
                 }
                 board.printBoard();
+                System.out.println(robot2.getAlignment());
 
 
             }

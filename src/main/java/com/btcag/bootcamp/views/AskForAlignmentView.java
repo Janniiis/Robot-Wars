@@ -10,6 +10,7 @@ public class AskForAlignmentView {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 «--------------------------------------------------------------»
+                
                 Bitte wähle eine Richtung in die dein Roboter ausgerichtet werden soll:
                 
                 [w] Oben

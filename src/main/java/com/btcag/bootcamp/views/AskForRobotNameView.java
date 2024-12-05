@@ -6,7 +6,9 @@ public class AskForRobotNameView {
     public static String display(){
         System.out.println("""
                 «-----------------------------------------------»
+                
                 Bitte geben sie den Namen für ihren Roboter ein: 
+                
                 «-----------------------------------------------»
                 """);
         Scanner scanner = new Scanner(System.in);

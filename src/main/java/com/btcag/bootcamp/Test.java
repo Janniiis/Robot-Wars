@@ -17,36 +17,40 @@ public class Test {
     }
 
     public static void printHeaderRow(int width){
-        printRow(width, "┌", "─", "┬", "┐");
+        for (int i = 0; i < width; i++){
+            printHeaderRow(width, " ┌", "─", "┬");
+        }
+
     }
 
     public static void printMainRow(int width){
-        for (int i = 0; i < height - 2; i++){
-            printRow(width, "├", "─", "┼", "┤");
+        for (int i = 0; i < height / 2; i++){
+            System.out.println();
+            printRow(width, " ├", " ", "┼");
         }
+        System.out.println();
     }
 
-    public static void printBottomRow(int width){
-        printRow(width, "└", "─", "┴", "┘");
+    public static void printBottomRow(int width)
+    {
+        printRow(width, "└", "─", "┴");
     }
 
-    public static void printRow(int width, String start, String main, String connector, String end){
-        int counterX = 1;
+    public static void printRow(int width, String start, String main, String connector){
         System.out.print(start);
-        for (int i = 0; i < width; i++){
-            if (counterX == robotX && counterY == robotY) {
-                System.out.print(symbol);
-            } else {
-                System.out.print(main);
-            }
-
-            if (i < width - 1) {
-                System.out.print(connector);
-            }
-            counterX++;
-        }
-        System.out.print(end);
+        System.out.print(" "+main);
+        System.out.print(" "+connector);
+        System.out.print(" "+main);
         System.out.println();
         counterY++;
     }
+
+    public static void printHeaderRow(int width, String start, String main, String connector){
+        System.out.print(start);
+        System.out.print(" "+main);
+        System.out.print(" "+connector);
+        System.out.print(" "+main);
+        counterY++;
+    }
+
 }

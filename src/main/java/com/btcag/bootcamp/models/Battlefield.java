@@ -1,7 +1,5 @@
 package com.btcag.bootcamp.models;
 
-import com.btcag.bootcamp.ASCIIBoard;
-
 public class Battlefield {
     private static int width = 10;
     private static int height = 15;
@@ -23,7 +21,12 @@ public class Battlefield {
         return height;
     }
 
-    public boolean isValidField(int x, int y) {
+    public boolean isValidField(int x, int y, Obstacle[] obstacles) {
+        for (Obstacle obstacle : obstacles) {
+            if (obstacle.getObstaclePositionX() == x && obstacle.getObstaclePositionY() == y) {
+                return false;
+            }
+        }
         return x > 0 && x <= width && y > 0 && y <= height;
     }
 
@@ -44,13 +47,11 @@ public class Battlefield {
     }
 
     public void printBoard() {
-        System.out.println("Spieler 1");
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 System.out.print(board[i][j] + " ");
             }
             System.out.println();
         }
-        System.out.println("Spieler 2");
     }
 }

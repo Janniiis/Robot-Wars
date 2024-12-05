@@ -1,5 +1,4 @@
 package com.btcag.bootcamp.enums;
-import com.btcag.bootcamp.Roboter;
 
 public enum Directions {
     NORD(0, -1),
