@@ -5,6 +5,8 @@ import com.btcag.bootcamp.models.Battlefield;
 import com.btcag.bootcamp.models.Items;
 import com.btcag.bootcamp.models.Obstacle;
 import com.btcag.bootcamp.models.Robot;
+
+import java.util.Objects;
 import java.util.Random;
 
 public class RobotService {
@@ -52,14 +54,14 @@ public class RobotService {
     }
 
     public static boolean checkIfRobotIsInHorizontalFOV(Robot robot, Robot robot2){
-        if (robot.getAlignment() == "WEST"){
+        if (Objects.equals(robot.getAlignment(), "WEST")){
             if (robot2.getRoboterPositionX() < robot.getRoboterPositionX() && robot.getRoboterPositionY() == robot2.getRoboterPositionY()){
                 return true;
             }
             return false;
         }
 
-        else if (robot.getAlignment() == "OST"){
+        else if (Objects.equals(robot.getAlignment(), "OST")){
             if (robot2.getRoboterPositionX() > robot.getRoboterPositionX() && robot.getRoboterPositionY() == robot2.getRoboterPositionY()){
                 return true;
             }
@@ -69,15 +71,15 @@ public class RobotService {
     }
 
     public static boolean checkIfRobotIsInVerticalFOV(Robot robot, Robot robot2){
-        if (robot.getAlignment() == "NORD"){
-            if (robot2.getRoboterPositionY() > robot.getRoboterPositionY() && robot.getRoboterPositionX() == robot2.getRoboterPositionX()){
+        if (Objects.equals(robot.getAlignment(), "NORD")){
+            if (robot2.getRoboterPositionY() < robot.getRoboterPositionY() && robot.getRoboterPositionX() == robot2.getRoboterPositionX()){
                 return true;
             }
             return false;
         }
 
-        if (robot.getAlignment() == "SUED"){
-            if (robot2.getRoboterPositionY() < robot.getRoboterPositionY() && robot.getRoboterPositionX() == robot2.getRoboterPositionX()){
+        if (Objects.equals(robot.getAlignment(), "SUED")){
+            if (robot2.getRoboterPositionY() > robot.getRoboterPositionY() && robot.getRoboterPositionX() == robot2.getRoboterPositionX()){
                 return true;
             }
             return false;
@@ -86,25 +88,25 @@ public class RobotService {
     }
 
     public static boolean checkIfRobotIsInDiagonalFOV(Robot robot, Robot robot2){
-        if (robot.getAlignment() == "NORDWEST"){
+        if (Objects.equals(robot.getAlignment(), "NORDWEST")){
             if (robot2.getRoboterPositionY() < robot.getRoboterPositionY() && robot2.getRoboterPositionX() < robot.getRoboterPositionX() && checkDiagonal(robot, robot2)){
                 return true;
             }
             return false;
         }
-        else if (robot.getAlignment() == "SUEDWEST") {
+        else if (Objects.equals(robot.getAlignment(), "SUEDWEST")) {
             if (robot2.getRoboterPositionY() > robot.getRoboterPositionY() && robot2.getRoboterPositionX() < robot.getRoboterPositionX() && checkDiagonal(robot, robot2)){
                 return true;
             }
             return false;
         }
-        else if (robot.getAlignment() == "SUEDOST") {
-            if (robot2.getRoboterPositionY() > robot.getRoboterPositionY() && robot2.getRoboterPositionX() > robot.getRoboterPositionX() && checkDiagonal(robot, robot2)){
+        else if (Objects.equals(robot.getAlignment(), "SUEDOST")) {
+            if (robot.getRoboterPositionX() < robot2.getRoboterPositionX() && robot.getRoboterPositionX() < robot2.getRoboterPositionX() && checkDiagonal(robot, robot2)){
                 return true;
             }
             return false;
         }
-        else if (robot.getAlignment() == "NORDOST") {
+        else if (Objects.equals(robot.getAlignment(), "NORDOST")) {
             if (robot2.getRoboterPositionY() < robot.getRoboterPositionY() && robot2.getRoboterPositionX() > robot.getRoboterPositionX() && checkDiagonal(robot, robot2)){
                 return true;
             }

@@ -72,7 +72,7 @@ public class GameController {
             if (RobotService.checkPlayerTurn(robot, robot2)) {
                 playMove = AskForActionView.displayPlayerOne(robot);
                 if (playMove == 1) {
-                    if (RobotService.checkIfRobotIsInDiagonalFOV(robot2, robot) || RobotService.checkIfRobotIsInHorizontalFOV(robot, robot2) || RobotService.checkIfRobotIsInVerticalFOV(robot, robot2) && RobotService.checkIfPlayerInRange(robot, robot2)) {
+                    if ((RobotService.checkIfRobotIsInDiagonalFOV(robot, robot2) || RobotService.checkIfRobotIsInHorizontalFOV(robot, robot2) || RobotService.checkIfRobotIsInVerticalFOV(robot, robot2)) && RobotService.checkIfPlayerInRange(robot, robot2)) {
                         int tempHp = robot2.getHp();
                         tempHp -= robot.getAttackDamage();
                         robot2.setHp(tempHp);
@@ -114,7 +114,6 @@ public class GameController {
                                 break;
                             default:
                                 break;
-
                         }
                     }
                     ;
