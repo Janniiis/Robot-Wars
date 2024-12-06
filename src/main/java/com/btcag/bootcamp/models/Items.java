@@ -34,4 +34,12 @@ public class Items {
     public String getItemName() {
         return itemName;
     }
+
+    public void setItemPositionX(int itemPositionX) {
+        itemPositionX = itemPositionX;
+    }
+
+    public void setItemPositionY(int itemPositionY) {
+        itemPositionY = itemPositionY;
+    }
 }

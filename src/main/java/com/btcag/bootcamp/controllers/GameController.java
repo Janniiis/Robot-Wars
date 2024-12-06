@@ -11,6 +11,7 @@ public class GameController {
 
     public static void main(String[] args) {
 
+        // Splashscreen
         IntroScreenView.display();
 
         // Erstellung Spieler 1
@@ -42,11 +43,15 @@ public class GameController {
             obstacles[i] = new Obstacle(random.nextInt(3, 7), random.nextInt(3, 12));
         }
 
-        // Spielfeld (Grafisch)
+        // Farbcodes
         String redValue = Colors.RED.getValue();
         String blueValue = Colors.BLUE.getValue();
         String resetValue = Colors.RESET.getValue();
+
+        // Spielfeld
         Battlefield board = new Battlefield(10, 15);
+
+        // Symbole Platzieren
         board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), robot.getRoboterSymbol());
         board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), robot2.getRoboterSymbol());
         board.placeSymbol(items.getItemPositionX(), items.getItemPositionY(), '�');
@@ -56,7 +61,6 @@ public class GameController {
             board.placeSymbol(obstacle.getObstaclePositionX(), obstacle.getObstaclePositionY(), '■');
         }
         board.printBoard();
-
 
         // Spielgeschehen
         do {
@@ -71,6 +75,8 @@ public class GameController {
             // Zug - Spieler 1
             if (RobotService.checkPlayerTurn(robot, robot2)) {
                 playMove = AskForActionView.displayPlayerOne(robot);
+
+                // Angriff
                 if (playMove == 1) {
                     if ((RobotService.checkIfRobotIsInDiagonalFOV(robot, robot2) || RobotService.checkIfRobotIsInHorizontalFOV(robot, robot2) || RobotService.checkIfRobotIsInVerticalFOV(robot, robot2)) && RobotService.checkIfPlayerInRange(robot, robot2)) {
                         int tempHp = robot2.getHp();
@@ -79,8 +85,11 @@ public class GameController {
                     } else {
                         System.out.println("Entweder ist das Ziel nicht in Reichweite, es ist etwas im weg oder du bist nicht richtig ausgerichtet!");
                     }
+
+                // Bewegen
                 } else if (playMove == 2) {
 
+                    // Bewegung
                     do {
 
                         Directions direction = MoveRobotView.display();
@@ -99,28 +108,36 @@ public class GameController {
                                 temp += items.getItemEffect();
                                 robot.setAttackDamage(temp);
                                 board.placeSymbol(items.getItemPositionX(), items.getItemPositionY(), '.');
+                                items.setItemPositionX(-10);
+                                items.setItemPositionY(-10);
                                 break;
                             case 1:
                                 int temp1 = robot.getAttackRange();
                                 temp1 += items1.getItemEffect();
                                 robot.setAttackRange(temp1);
                                 board.placeSymbol(items1.getItemPositionX(), items1.getItemPositionY(), '.');
+                                items1.setItemPositionX(-10);
+                                items1.setItemPositionY(-10);
                                 break;
                             case 2:
                                 int temp2 = robot.getMovementRange();
                                 temp2 += items2.getItemEffect();
                                 robot.setMovementRange(temp2);
                                 board.placeSymbol(items2.getItemPositionX(), items2.getItemPositionY(), '.');
+                                items2.setItemPositionX(-10);
+                                items2.setItemPositionY(-10);
                                 break;
                             default:
                                 break;
                         }
                     }
                     ;
+                    // Roboter wird aktualisiert
                     board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), '.');
                     robot.setPosition(newX, newY);
                     board.placeSymbol(robot.getRoboterPositionX(), robot.getRoboterPositionY(), robot.getRoboterSymbol());
 
+                // Ausrichtung
                 } else if (playMove == 3) {
                     robot.setAlignment(AskForAlignmentView.display());
                     robot.setMovementRange(robot.getMovementRange() - 1);
@@ -128,9 +145,10 @@ public class GameController {
                     System.out.println("fehler");
                 }
 
+                // Ausgabe aktualisierter Spielfeld
                 board.printBoard();
                 System.out.println(robot.getAlignment());
-
+                HealthScreenView.display(robot, robot2);
 
                 // Zug - Spieler 2
             } else {
@@ -178,8 +196,6 @@ public class GameController {
 
                         }
                     }
-                    ;
-
                     board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), '.');
                     robot2.setPosition(new_X, new_Y);
                     board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), robot2.getRoboterSymbol());
@@ -192,8 +208,7 @@ public class GameController {
                 }
                 board.printBoard();
                 System.out.println(robot2.getAlignment());
-
-
+                HealthScreenView.display(robot2, robot);
             }
 
             // Win condition
