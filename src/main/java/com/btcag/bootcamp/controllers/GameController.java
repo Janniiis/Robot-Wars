@@ -16,14 +16,14 @@ public class GameController {
 
         // Erstellung Spieler 1
         String robotName = AskForRobotNameView.display();
-        Robot robot = new Robot(robotName, 0, 0, '☼', 1, 1, 1, 1, "south");
+        Robot robot = new Robot(robotName, 0, 0, '☼', 10, 1, 1, 1, "south");
         RobotView.display1(robot);
         AskForSkillPoints.display(robot);
         AskForSkillPoints.displayStats(robot);
 
         // Erstellung Spieler 2
         String robotNameP2 = AskForRobotNameView.display();
-        Robot robot2 = new Robot(robotNameP2, 9, 14, '♣', 1, 1, 1, 1, "north");
+        Robot robot2 = new Robot(robotNameP2, 5, 5, '♣', 10, 1, 1, 1, "north");
         RobotView.display2(robot2);
         AskForSkillPoints.display(robot2);
         AskForSkillPoints.displayStats(robot2);
@@ -78,7 +78,14 @@ public class GameController {
 
                 // Angriff
                 if (playMove == 1) {
-                    if ((RobotService.checkIfRobotIsInDiagonalFOV(robot, robot2) || RobotService.checkIfRobotIsInHorizontalFOV(robot, robot2) || RobotService.checkIfRobotIsInVerticalFOV(robot, robot2)) && RobotService.checkIfPlayerInRange(robot, robot2)) {
+                    if ((RobotService.checkIfRobotIsInDiagonalFOV(robot, robot2) ||                     // True
+                            RobotService.checkIfRobotIsInHorizontalFOV(robot, robot2) ||                // True
+                            RobotService.checkIfRobotIsInVerticalFOV(robot, robot2)) &&                 // True
+                            RobotService.checkIfPlayerInRange(robot, robot2) &&                         // True
+                            RobotService.checkIfObstacleInVerticalFOV(robot, robot2, obstacles) &&      // False
+                            RobotService.checkIfObstacleDiagonal(robot, robot2, obstacles) &&           // False
+                            RobotService.checkIfObstacleInHorizontalFOV(robot, robot2, obstacles))      // False
+                    {
                         int tempHp = robot2.getHp();
                         tempHp -= robot.getAttackDamage();
                         robot2.setHp(tempHp);
@@ -95,6 +102,7 @@ public class GameController {
                         Directions direction = MoveRobotView.display();
                         newX = robot.getRoboterPositionX() + direction.getX();
                         newY = robot.getRoboterPositionY() + direction.getY();
+                        robot.setMovementRange(robot.getMovementRange()-1);
 
                     } while (!board.isValidField(newX, newY, obstacles));
 
@@ -153,14 +161,25 @@ public class GameController {
                 // Zug - Spieler 2
             } else {
                 playMove = AskForActionView.displayPlayerTwo(robot2);
+
+                // Angriff
                 if (playMove == 1) {
-                    if (RobotService.checkIfRobotIsInDiagonalFOV(robot2, robot) || RobotService.checkIfRobotIsInHorizontalFOV(robot2, robot) || RobotService.checkIfRobotIsInVerticalFOV(robot2, robot) && RobotService.checkIfPlayerInRange(robot, robot2)) {
+                    if (RobotService.checkIfRobotIsInDiagonalFOV(robot2, robot) ||                          // True
+                            RobotService.checkIfRobotIsInHorizontalFOV(robot2, robot) ||                    // True
+                            RobotService.checkIfRobotIsInVerticalFOV(robot2, robot) &&                      // True
+                            RobotService.checkIfPlayerInRange(robot, robot2) &&                             // True
+                            RobotService.checkIfObstacleInHorizontalFOV(robot2, robot, obstacles) &&        // False
+                            RobotService.checkIfObstacleInVerticalFOV(robot2, robot, obstacles) &&          // False
+                            RobotService.checkIfObstacleInVerticalFOV(robot2, robot, obstacles)             // False
+                    ) {
                         int tempHp = robot.getHp();
                         tempHp -= robot2.getAttackDamage();
                         robot.setHp(tempHp);
                     } else {
                         System.out.println("Entweder ist das Ziel nicht in Reichweite, es ist etwas im weg oder du bist nicht richtig ausgerichtet!");
                     }
+
+                // Bewegen
                 } else if (playMove == 2) {
 
                     do {
@@ -168,6 +187,7 @@ public class GameController {
                         Directions direction = MoveRobotView.display();
                         new_X = robot2.getRoboterPositionX() + direction.getX();
                         new_Y = robot2.getRoboterPositionY() + direction.getY();
+
 
                     } while (!board.isValidField(new_X, new_Y, obstacles));
 
@@ -196,16 +216,21 @@ public class GameController {
 
                         }
                     }
+
+                    // Spielfeld aktualisieren
                     board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), '.');
                     robot2.setPosition(new_X, new_Y);
                     board.placeSymbol(robot2.getRoboterPositionX(), robot2.getRoboterPositionY(), robot2.getRoboterSymbol());
 
+                // Ausrichtung
                 } else if (playMove == 3) {
                     robot2.setAlignment(AskForAlignmentView.display());
                     robot2.setMovementRange(robot2.getMovementRange() - 1);
                 } else {
                     System.out.println("fehler");
                 }
+
+                // Ausgabe aktualisiertes Spielfeld
                 board.printBoard();
                 System.out.println(robot2.getAlignment());
                 HealthScreenView.display(robot2, robot);

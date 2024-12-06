@@ -1,7 +1,5 @@
 package com.btcag.bootcamp.services;
 
-import com.btcag.bootcamp.enums.Alignments;
-import com.btcag.bootcamp.models.Battlefield;
 import com.btcag.bootcamp.models.Items;
 import com.btcag.bootcamp.models.Obstacle;
 import com.btcag.bootcamp.models.Robot;
