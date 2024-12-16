@@ -1,0 +1,420 @@
+openapi: 3.0.3
+info:
+  title: Robot Wars API
+  description: Eine Api für das Spiel Robot Wars
+  version: 1.0.0
+paths:
+  /api/robots:
+    get:
+      summary: Liste von Robotern
+      description: Liefer eine liste von allen Robotern
+      responses:
+        '200':
+          description: Erfolgreiche Antwort.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Robot'
+        '500':
+          description: Interner Serverfehler.
+  /api/robots/robot/{id}:
+    get:
+      summary: Bestimmter Roboter
+      description: Liefert einen Roboter mit der ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Die ID des Roboters.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Erfolgreiche Antwort.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Robot'
+        '500':
+          description: Interner Serverfehler.
+  /api/games/game/{id}:
+    get:
+      summary: Bestimmtes Spiel
+      description: Liefert ein Spiel mit der ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Die ID des Spiel.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Erfolgreiche Antwort.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Game'
+        '500':
+          description: Interner Serverfehler.
+  /api/maps:
+    get:
+      summary: Karten
+      description: Liefert alle vorhandenen Karten
+      responses:
+        '200':
+          description: Erfolgreiche Antwort.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Map'
+        '500':
+          description: Interner Serverfehler.
+  /api/games/game/{id}/move/{moveId}/after:
+    get:
+      summary: Alle Bewegungen
+      description: Liefert eine lieste aller Bewegungen nach der Bewegung die in der MoveID beschriben ist, im einem bestimmten Spiel.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Die ID des Spiels.
+          schema:
+            type: string
+        - name: moveId
+          in: path
+          required: true
+          description: Die ID des Spiels.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Roboter erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Move'
+  /api/robots/robot:
+    post:
+      summary: Einen neuen Roboter erstellen
+      description: Erstellt einen neuen Roboter mit den bereitgestellten Daten.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRobot'
+      responses:
+        '201':
+          description: Roboter erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Robot'
+        '400':
+          description: Ungültige Anfrage.
+  /api/games/game:
+    post:
+      summary: Einen neues Spiel erstellen
+      description: Erstellt ein neues Spielt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGame'
+      responses:
+        '201':
+          description: Roboter erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Ungültige Anfrage.
+  /api/games/game/{id}/join:
+    post:
+      summary: Spiel beitreten
+      description: Einen bestehenden Spiel beitreten
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Die ID des Spiels.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinGame'
+      responses:
+        '201':
+          description: Roboter erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JoinGameResponse'
+        '400':
+          description: Ungültige Anfrage.
+  /api/games/game/{id}/move:
+    get:
+      summary: Alle Bewegungen
+      description: Liefert eine lieste aller Bewegungen im einem bestimmten Spiel.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Die ID des Spiels.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Roboter erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Move'
+  /api/games/game/{id}/move/player/{playerId}:
+    post:
+      summary: Einen neues Spiel erstellen
+      description: Erstellt ein neues Spielt.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Die ID des Spiels.
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          description: Die ID des Spielers.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMove'
+      responses:
+        '201':
+          description: Roboter erfolgreich erstellt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Move'
+        '400':
+          description: Ungültige Anfrage.
+components:
+  schemas:
+    Robot:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Einzigartige Id des Roboters
+          example: 1234
+        name:
+          type: string
+          description: Name des Roboters
+          example: "Wall e"
+        health:
+          type: number
+          description: Leben des Roboters
+          example: 10
+        attackDamage:
+          type: number
+          description: Schaden des Roboters
+          example: 10
+        attackRange:
+          type: number
+          description:  Angriffradius des Roboters
+          example: 10
+        movementRate:
+          type: number
+          description: Bewegungsradius des Roboters
+          example: 10
+      required:
+        - id
+        - name
+        - health
+        - attackDamage
+        - attackRange
+        - movementRate
+    NewRobot:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name des Roboters
+          example: "Wall e"
+        health:
+          type: number
+          description: Leben des Roboters
+          example: 10
+        attackDamage:
+          type: number
+          description: Schaden des Roboters
+          example: 10
+        attackRange:
+          type: number
+          description:  Angriffradius des Roboters
+          example: 10
+        movementRate:
+          type: number
+          description: Bewegungsradius des Roboters
+          example: 10
+      required:
+        - name
+        - health
+        - attackDamage
+        - attackRange
+        - movementRate
+    NewGame:
+      type: object
+      properties:
+        mapId:
+          type: number
+          description: Die Map ID für die Auswahl der Karte
+          example: 1234
+      required:
+        - robots
+    Game:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Einzigartige Id des Spiels
+          example: 1234
+        map:
+          type: number
+          description: Map Id
+          example: 1234
+        robots:
+          type: array
+          items:
+            $ref: '#/components/schemas/Robot'
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/Move'
+        status:
+          type: string
+          description: STARTED, INITIAL, END
+          example: STARTED
+      required:
+        - id
+        - map
+        - robots
+        - moves
+    JoinGame:
+      type: object
+      properties:
+        robotId:
+          type: number
+          description: Roboter ID
+          example: 1234
+    JoinGameResponse:
+      type: object
+      properties:
+        playerId:
+          type: number
+          description: Spieler ID
+          example: 1234
+    Map:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Einzigartige Id der Kart
+          example: 1234
+        mapSizeX:
+          type: number
+          description: Groesse der X Achse
+          example: 1234
+        mapSize:
+          type: number
+          description: Groesse Karte
+          example: 1234
+        mapItems:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: WALL, ROBOT, ITEM
+                example: ROBOT
+              index:
+                type: number
+                description: Platz auf der Karte
+                example: 1
+      required:
+        - id
+        - mapSizeX
+        - mapSizeY
+        - gameId
+        - placedRobots
+        - placedItems
+        - blockedFields
+    NewMove:
+      type: object
+      properties:
+        robotId:
+          type: number
+          description: Die Roboter ID für den Roboter, der Bewegt werden soll
+          example: 1234
+        moventType:
+          type: string
+          description: ATTACK,MOVE,ALIGN,END
+          example: ATTACK
+        mapIndex:
+          type: number
+          description: Postion im Map Array
+          example: 1
+        align:
+          type: string
+          description: N,S,O,W,NW,NO,SW,SO,
+          example: N
+      required:
+        - robotId
+        - moventType
+        - mapIndex
+        - align
+    Move:
+      type: object
+      properties:
+        moveId:
+          type: number
+          description: Die Move ID für den angelegten Move
+          example: 1234
+        robotId:
+          type: number
+          description: Die Roboter ID für den Roboter, der Bewegt werden soll
+          example: 1234
+        moventType:
+          type: string
+          description: ATTACK,MOVE,ALIGN,ITEM,END
+          example: ATTACK
+        mapIndex:
+          $ref: '#/components/schemas/MapIndex'
+        parameter:
+          type: string
+          description: N,S,O,W,NW,NO,SW,SO,ITEM
+          example: N
+    MapIndex:
+      type: number
+      description: Postion im Map Array
+      example: 1
