@@ -22,16 +22,20 @@ public class APIconnection {
     protected static String gameURL = "https://82rvkz5o22.execute-api.eu-central-1.amazonaws.com/prod/api/games/game/";
     protected static String mapId = "d2d0b803-955d-4367-8fdd-c8c3f94fecbb";
     protected static String robotId = "17e3b851-9a56-4214-9e1b-34329e27f31a";
+    protected static String gameId = "ec528feb-b394-4a68-8859-74c78606572e";
+    protected static String playerId = "";
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         //getAllBots();
         //getSpecificBot();
         //getAllMaps();
         Bot bot = new Bot("Eris", 5, 5, 2, 2);
         //createRobot(bot);
-        //createGame();
-        joinGame();
+        createGame();
+        //joinGame();
+        //Thread.sleep(5000);
+        //movePlayer();
 
     }
 
@@ -141,12 +145,32 @@ public class APIconnection {
         System.out.println(jsonInputString);
         int code = con.getResponseCode();
         System.out.println(code);
+
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            JSONObject responseObject = new JSONObject(response.toString());
+            gameId = responseObject.getString("id");
+            System.out.println(gameId);
+        } catch (IOException e) {
+            try (BufferedReader errorReader = new BufferedReader(
+                    new InputStreamReader(con.getErrorStream(), "utf-8"))) {
+                StringBuilder errorResponse = new StringBuilder();
+                String errorLine;
+                while ((errorLine = errorReader.readLine()) != null) {
+                    errorResponse.append(errorLine.trim());
+                }
+                System.err.println("Error Response Body: " + errorResponse.toString());
+            }
+        }
     }
 
     public static void joinGame() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        String id = scanner.nextLine();
-        URL url = new URL(gameURL + id + "/join");
+        URL url = new URL(gameURL + gameId + "/join");
 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
@@ -159,6 +183,57 @@ public class APIconnection {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("robotId", robotId);
 
+        String jsonInputString = jsonObject.toString();
+
+        try(OutputStream os = con.getOutputStream()) {
+            byte[] input = jsonObject.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        System.out.println(jsonInputString);
+        int code = con.getResponseCode();
+        System.out.println(code);
+
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            JSONObject responseObject = new JSONObject(response.toString());
+            playerId = responseObject.getString("playerId");
+            System.out.println(playerId);
+        } catch (IOException e) {
+            try (BufferedReader errorReader = new BufferedReader(
+                    new InputStreamReader(con.getErrorStream(), "utf-8"))) {
+                StringBuilder errorResponse = new StringBuilder();
+                String errorLine;
+                while ((errorLine = errorReader.readLine()) != null) {
+                    errorResponse.append(errorLine.trim());
+                }
+                System.err.println("Error Response Body: " + errorResponse.toString());
+            }
+        }
+
+
+    }
+
+    public static void movePlayer() throws IOException {
+        URL url = new URL(gameURL + gameId + "/move/player/" + robotId);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("POST");
+        con.setDoOutput(true);
+        con.setDoInput(true);
+        con.setUseCaches(false);
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Accept", "application/json");
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("playerId", playerId);
+        jsonObject.put("movementType", "ATTACK");
+        jsonObject.put("mapIndex", 0);
+        jsonObject.put("align", "W");
         String jsonInputString = jsonObject.toString();
 
         try(OutputStream os = con.getOutputStream()) {
