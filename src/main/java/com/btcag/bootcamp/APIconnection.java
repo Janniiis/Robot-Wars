@@ -21,6 +21,7 @@ public class APIconnection {
     protected static String mapURL = "https://82rvkz5o22.execute-api.eu-central-1.amazonaws.com/prod/api/maps/";
     protected static String gameURL = "https://82rvkz5o22.execute-api.eu-central-1.amazonaws.com/prod/api/games/game/";
     protected static String mapId = "d2d0b803-955d-4367-8fdd-c8c3f94fecbb";
+    protected static String robotId = "17e3b851-9a56-4214-9e1b-34329e27f31a";
 
 
     public static void main(String[] args) throws IOException {
@@ -29,7 +30,8 @@ public class APIconnection {
         //getAllMaps();
         Bot bot = new Bot("Eris", 5, 5, 2, 2);
         //createRobot(bot);
-        createGame();
+        //createGame();
+        joinGame();
 
     }
 
@@ -129,6 +131,33 @@ public class APIconnection {
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mapId", mapId);
+
+        String jsonInputString = jsonObject.toString();
+
+        try(OutputStream os = con.getOutputStream()) {
+            byte[] input = jsonObject.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+        System.out.println(jsonInputString);
+        int code = con.getResponseCode();
+        System.out.println(code);
+    }
+
+    public static void joinGame() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String id = scanner.nextLine();
+        URL url = new URL(gameURL + id + "/join");
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("POST");
+        con.setDoOutput(true);
+        con.setDoInput(true);
+        con.setUseCaches(false);
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Accept", "application/json");
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("robotId", robotId);
 
         String jsonInputString = jsonObject.toString();
 
