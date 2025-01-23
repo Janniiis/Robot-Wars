@@ -8,6 +8,7 @@ import java.util.Scanner;
 import static com.btcag.bootcamp.APIconnection.*;
 
 public class AskForMenuView {
+    public static Bot bot = new Bot("");
     public static int display() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
@@ -44,8 +45,7 @@ public class AskForMenuView {
             } else if (input == 6) {
                 getSpecificGame();
             } else if (input == 7) {
-                String botName = AskForRobotNameView.display();
-                Bot bot = new Bot(botName);
+                bot.setName(AskForRobotNameView.display());
                 AskForSkillPoints.display(bot);
                 AskForSkillPoints.displayStats(bot);
                 createRobot(bot);
@@ -54,7 +54,7 @@ public class AskForMenuView {
             } else if (input == 9) {
                 joinGame();
             } else if (input == 10) {
-                makeAMove();
+                makeAMove(bot);
             }else if (input == 99) {
                 System.out.println("Programm beendet!");
             } else {
