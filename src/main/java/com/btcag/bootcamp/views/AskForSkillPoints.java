@@ -1,11 +1,11 @@
 package com.btcag.bootcamp.views;
 
-import com.btcag.bootcamp.models.Robot;
+import com.btcag.bootcamp.models.Bot;
 
 import java.util.Scanner;
 
 public class AskForSkillPoints {
-    public static void display(Robot robot){
+    public static void display(Bot bot){
         int skillpoints = 10;
         Scanner readIn = new Scanner(System.in);
         while (skillpoints > 0){
@@ -27,16 +27,16 @@ public class AskForSkillPoints {
 
 
             if (choice == 1) {
-                robot.setMovementRange(temp);
+                bot.setMovementRate(temp);
                 skillpoints-=temp;
             } else if (choice == 2) {
-                robot.setAttackDamage(temp);
+                bot.setAttackDamage(temp);
                 skillpoints-=temp;
             } else if (choice == 3) {
-                robot.setHp(temp);
+                bot.setHealth(temp);
                 skillpoints-=temp;
             } else if (choice == 4) {
-                robot.setAttackRange(temp);
+                bot.setAttackRange(temp);
                 skillpoints-=temp;
             } else {
                 System.out.println("Ungültige auswahl");
@@ -59,13 +59,13 @@ public class AskForSkillPoints {
          return readIn.nextInt();
     }
 
-    public static void displayStats(Robot robot){
+    public static void displayStats(Bot bot){
         System.out.println("«-----------------------------------------------»\n\n"  +
                 "Du hast folgende Skillpunkte verteilt: "+
-                "\nHealthpoints: " + robot.getHp()+
-                "\nDamage: " + robot.getAttackDamage() +
-                "\nRange: " + robot.getAttackRange() +
-                "\nBewegunsrate: " + robot.getMovementRange()+
+                "\nHealthpoints: " + bot.getHealth()+
+                "\nDamage: " + bot.getAttackDamage() +
+                "\nRange: " + bot.getAttackRange() +
+                "\nBewegunsrate: " + bot.getMovementRate()+
                 "\n\n«-----------------------------------------------»");
     }
 }

@@ -1,4 +1,4 @@
-package com.btcag.bootcamp.controllers;
+/*package com.btcag.bootcamp.controllers;
 
 import com.btcag.bootcamp.models.*;
 import com.btcag.bootcamp.enums.*;
@@ -15,11 +15,9 @@ public class GameController {
         IntroScreenView.display();
 
         // Erstellung Spieler 1
-        String robotName = AskForRobotNameView.display();
-        Robot robot = new Robot(robotName, 0, 0, '☼', 10, 1, 1, 1, "south");
         RobotView.display1(robot);
-        AskForSkillPoints.display(robot);
-        AskForSkillPoints.displayStats(robot);
+        AskForSkillPoints.display(bot);
+        AskForSkillPoints.displayStats(bot);
 
         // Erstellung Spieler 2
         String robotNameP2 = AskForRobotNameView.display();
@@ -240,3 +238,5 @@ public class GameController {
         } while (!RobotService.checkGameOver(robot, robot2));
     }
 }
+
+ */
