@@ -1,7 +1,7 @@
 package com.btcag.bootcamp.services;
 
 import com.btcag.bootcamp.models.Bot;
-import com.btcag.bootcamp.views.AskForMoveAction;
+import com.btcag.bootcamp.views.AskForMoveActionView;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -177,7 +177,7 @@ public class PostRequests {
         int mapIndex = 0;
         String alignment = "N";
 
-        move = AskForMoveAction.display(bot);
+        move = AskForMoveActionView.display(bot);
         getMapIndex();
         URL url = new URL(gameURL + gameId + "/move/player/" + playerId);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();

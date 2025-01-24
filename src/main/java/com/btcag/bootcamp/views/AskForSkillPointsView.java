@@ -4,7 +4,7 @@ import com.btcag.bootcamp.models.Bot;
 
 import java.util.Scanner;
 
-public class AskForSkillPoints {
+public class AskForSkillPointsView {
     public static void display(Bot bot){
         int skillpoints = 10;
         Scanner readIn = new Scanner(System.in);

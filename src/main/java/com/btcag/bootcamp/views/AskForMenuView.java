@@ -47,8 +47,9 @@ public class AskForMenuView {
                 getSpecificGame();
             } else if (input == 7) {
                 bot.setName(AskForRobotNameView.display());
-                AskForSkillPoints.display(bot);
-                AskForSkillPoints.displayStats(bot);
+                bot.setSymbol(AskForRobotSymbolView.display());
+                AskForSkillPointsView.display(bot);
+                AskForSkillPointsView.displayStats(bot);
                 Thread.sleep(3000);
                 createRobot(bot);
             } else if (input == 8) {

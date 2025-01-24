@@ -6,6 +6,7 @@ public class Bot {
     int attackDamage;
     int attackRange;
     int movementRate;
+    String symbol;
 
     public Bot( String name) {
         this.name = name;
@@ -13,6 +14,7 @@ public class Bot {
         this.attackDamage= 1;
         this.attackRange= 1;
         this.movementRate= 1;
+        this.symbol = "o";
     }
 
     public int getAttackDamage() {
@@ -35,6 +37,10 @@ public class Bot {
         return movementRate;
     }
 
+    public String getSymbol(){
+        return symbol;
+    }
+
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
@@ -53,6 +59,10 @@ public class Bot {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }
 

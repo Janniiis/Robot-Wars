@@ -1,11 +1,10 @@
 package com.btcag.bootcamp.views;
 
 import com.btcag.bootcamp.models.Bot;
-import com.btcag.bootcamp.models.Robot;
 
 import java.util.Scanner;
 
-public class AskForMoveAction {
+public class AskForMoveActionView {
     public static String display(Bot bot){
         Scanner scanner = new Scanner(System.in);
         System.out.println("«--------------------»");
