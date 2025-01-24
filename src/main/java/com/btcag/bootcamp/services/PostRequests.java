@@ -1,24 +1,20 @@
-package com.btcag.bootcamp;
+package com.btcag.bootcamp.services;
+
+import com.btcag.bootcamp.models.Bot;
+import com.btcag.bootcamp.views.AskForMoveAction;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-
-import com.btcag.bootcamp.models.*;
-
-import com.btcag.bootcamp.views.AskForMoveAction;
-import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Scanner;
 
-public class APIconnection {
+import static com.btcag.bootcamp.services.GetRequests.getMapIndex;
 
-    // GLOBALE VARIABLEN
-
+public class PostRequests {
     protected static String baseURL = "https://eumth8x973.execute-api.eu-central-1.amazonaws.com/prod/";
     protected static String botURL = "https://eumth8x973.execute-api.eu-central-1.amazonaws.com/prod/api/robots/robot/";
     protected static String mapURL = "https://eumth8x973.execute-api.eu-central-1.amazonaws.com/prod/api/maps/";
@@ -27,66 +23,6 @@ public class APIconnection {
     protected static String robotId = "";
     protected static String gameId = "";
     protected static String playerId = "";
-
-    // MAN BEKOMMT ALLE BOTS AUSGEGEBEN
-
-    public static void getAllBots() throws IOException {
-        URL url = new URL(baseURL + "api/robots");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content);
-        con.disconnect();
-    }
-
-    // MAN BEKOMMT EINEN BESTIMMTEN BOT AUSGEGEBEN
-
-    public static void getSpecificBot() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        String id = scanner.nextLine();
-        URL url = new URL(botURL + id);
-        System.out.println(url);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content);
-        con.disconnect();
-    }
-
-    // MAN BEKOMMT ALLE MAPS AUSGEGEBEN
-
-    public static void getAllMaps() throws IOException {
-        URL url = new URL(mapURL);
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content);
-        con.disconnect();
-    }
-
-    // ERSTELLUNG EINES ROBOTERS
 
     public static void createRobot(Bot bot) throws IOException {
         URL url = new URL(botURL);
@@ -139,8 +75,6 @@ public class APIconnection {
         }
     }
 
-    // EIN SPIEL ERSTELLEN
-
     public static void createGame() throws IOException {
         URL url = new URL(gameURL);
 
@@ -187,8 +121,6 @@ public class APIconnection {
             }
         }
     }
-
-    // EINEM SPIEL BEITRETEN
 
     public static void joinGame() throws IOException {
 
@@ -238,11 +170,7 @@ public class APIconnection {
                 System.err.println("Error Response Body: " + errorResponse.toString());
             }
         }
-
-
     }
-
-    // EIN SPIELZUG TÄTIGEN
 
     public static void makeAMove(Bot bot) throws IOException {
         String move = "";
@@ -278,94 +206,5 @@ public class APIconnection {
         System.out.println(response);
     }
 
-    // MAN BEKOMMT ALLE ERSTELLTEN SPIELE ZURÜCK
 
-    public static void getAllGames() throws IOException {
-        URL url = new URL(baseURL + "/api/games");
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content);
-        con.disconnect();
-
-    }
-
-    // MAN BEKOMMT EINE BESTIMMTE KARTE
-
-    public static void getSpecificMap() throws IOException {
-        URL url = new URL(baseURL + "/api/maps/map/" + mapId);
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content);
-        con.disconnect();
-    }
-
-    // MAN BEKOMMT EIN BESTIMMTES SPIEL
-
-    public static void getSpecificGame() throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        gameId = scanner.nextLine();
-
-        URL url = new URL(baseURL + "api/games/game/" + gameId);
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        System.out.println(content);
-        con.disconnect();
-    }
-
-    // MAN BEKOMMT DEN MAPINDEX
-
-    public static void getMapIndex() throws IOException {
-        URL url = new URL(baseURL + "api/games/game/" + gameId);
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer content = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            content.append(inputLine);
-        }
-        in.close();
-        con.disconnect();
-
-        String contentString = content.toString();
-        Pattern pattern = Pattern.compile("\"mapIndex\":\\s*(\\d+)");
-        Matcher matcher = pattern.matcher(contentString);
-        if (matcher.find()) {
-            String mapIndex = matcher.group(1);
-            System.out.println("Index: " + mapIndex);
-        } else {
-            System.out.println("Index nicht gefunden.");
-        }
-    }
 }
-
-
