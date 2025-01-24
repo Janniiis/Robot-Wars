@@ -29,7 +29,7 @@ public class AskForMenuView {
         return scanner.nextInt();
     }
 
-    public static void decideInput() throws IOException {
+    public static void decideInput() throws IOException, InterruptedException {
         int input;
         do {
             input = AskForMenuView.display();
@@ -49,6 +49,7 @@ public class AskForMenuView {
                 bot.setName(AskForRobotNameView.display());
                 AskForSkillPoints.display(bot);
                 AskForSkillPoints.displayStats(bot);
+                Thread.sleep(3000);
                 createRobot(bot);
             } else if (input == 8) {
                 createGame();

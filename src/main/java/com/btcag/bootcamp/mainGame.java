@@ -6,8 +6,9 @@ import com.btcag.bootcamp.views.IntroScreenView;
 import java.io.IOException;
 
 public class mainGame {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         IntroScreenView.display();
         AskForMenuView.decideInput();
+
     }
 }
