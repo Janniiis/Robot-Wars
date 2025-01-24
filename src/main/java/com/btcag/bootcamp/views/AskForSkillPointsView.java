@@ -11,6 +11,7 @@ public class AskForSkillPointsView {
         while (skillpoints > 0){
             System.out.println("Du hast noch " + skillpoints + " skillpunkte.");
             System.out.println("""
+                «-----------------------------------------------»
                 
                 Bitte wähle erst aus welche fähigkeit du leveln möchtest,
                 anschließen wie viele Skillpunkte du verteilen willst.

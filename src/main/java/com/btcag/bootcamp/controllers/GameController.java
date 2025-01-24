@@ -41,11 +41,6 @@ public class GameController {
             obstacles[i] = new Obstacle(random.nextInt(3, 7), random.nextInt(3, 12));
         }
 
-        // Farbcodes
-        String redValue = Colors.RED.getValue();
-        String blueValue = Colors.BLUE.getValue();
-        String resetValue = Colors.RESET.getValue();
-
         // Spielfeld
         Battlefield board = new Battlefield(10, 15);
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 public class mainGame {
     public static void main(String[] args) throws IOException, InterruptedException {
         IntroScreenView.display();
+        Thread.sleep(5000);
         AskForMenuView.decideInput();
 
     }

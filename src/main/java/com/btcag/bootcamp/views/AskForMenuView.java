@@ -13,7 +13,10 @@ public class AskForMenuView {
     public static int display() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
+                «-------------------------------------------------------»
+                
                 Bitte wähle zwischen folgenden Möglichkeiten:
+                
                     1 ~ gibt alle Roboter aus.
                     2 ~ gibt einen bestimmten Roboter aus.
                     3 ~ gibt alle Karten aus.
@@ -25,6 +28,8 @@ public class AskForMenuView {
                     9 ~ tritt einem Spiel bei.
                     10 ~ bewege den Roboter.
                     99 ~ Beenden.
+                    
+                «-------------------------------------------------------»
                 """);
         return scanner.nextInt();
     }
