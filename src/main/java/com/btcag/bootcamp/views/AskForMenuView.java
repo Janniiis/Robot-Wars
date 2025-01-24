@@ -5,7 +5,8 @@ import com.btcag.bootcamp.models.Bot;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static com.btcag.bootcamp.APIconnection.*;
+import static com.btcag.bootcamp.services.GetRequests.*;
+import static com.btcag.bootcamp.services.PostRequests.*;
 
 public class AskForMenuView {
     public static Bot bot = new Bot("");
