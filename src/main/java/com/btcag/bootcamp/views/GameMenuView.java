@@ -19,7 +19,8 @@ public class GameMenuView {
                                      [1] Roboter erstellen
                                      [2] Spiel erstellen
                                      [3] Spiel beitreten
-                                     [4] Verlassen
+                                     [4] Einen Spielzug machen
+                                     [5] Verlassen
                 
                 «-------------------------------------------------------»
                 """);
@@ -38,11 +39,14 @@ public class GameMenuView {
             } else if (choice == 3){
                 PostRequests.joinGame();
             } else if (choice == 4){
+                PostRequests.makeAMove(bot);
+            }
+            else if (choice == 5){
                 MainMenuView.display();
             }
             else{
                 System.out.println("error");
             }
-        }while (choice != 4);
+        }while (choice != 5);
     }
 }

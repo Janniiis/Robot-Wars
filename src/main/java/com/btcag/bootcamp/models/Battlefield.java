@@ -1,57 +1,32 @@
 package com.btcag.bootcamp.models;
 
 public class Battlefield {
-    private static int width = 10;
-    private static int height = 15;
-    private char[][] board;
+    private char[]board;
+    private final int rows;
+    private final int   cols;
 
-
-    public Battlefield(int width, int height) {
-        this.width = width;
-        this.height = height;
-        board = new char[height][width];
-        initializeBoard();
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public boolean isValidField(int x, int y, Obstacle[] obstacles) {
-        for (Obstacle obstacle : obstacles) {
-            if (obstacle.getObstaclePositionX() == x && obstacle.getObstaclePositionY() == y) {
-                return false;
-            }
-        }
-        return x > 0 && x <= width && y > 0 && y <= height;
-    }
-
-    private void initializeBoard() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                board[i][j] = '.';
-            }
+    // Erstellung der Map
+    public Battlefield(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        board = new char[rows*cols];
+        for(int i = 0; i < board.length; i++) {
+            board[i] = '.';
         }
     }
 
-    public void placeSymbol(int x, int y, char symbol) {
-        if (y >= 0 && y < height && x >= 0 && x < width) {
-            board[y][x] = symbol;
-        } else {
-            System.out.println("Koordinate außerhalb des Spielfelds.");
-        }
-    }
-
-    public void printBoard() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                System.out.print(board[i][j] + " ");
+    // Map wird initalisiert
+    public void initialiseMap() {
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                System.out.print(board[i*cols+j] + " ");
             }
             System.out.println();
         }
+    }
+
+    // Symbol (Roboter, Hindernisse oder items) auf die Karte bringen
+    public void printSymbol(int mapIndex, char symbol) {
+        board[mapIndex] = symbol;
     }
 }

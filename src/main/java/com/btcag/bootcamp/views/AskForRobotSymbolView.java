@@ -3,8 +3,8 @@ package com.btcag.bootcamp.views;
 import java.util.Scanner;
 
 public class AskForRobotSymbolView {
-    public static String display(){
-        String symbol = "";
+    public static char display(){
+        char symbol = 'o';
         System.out.println("""
                 «-------------------------------------------------------»
                 Bitte wähle zwischen einem der 4 unten gezeigten Symbole:
@@ -20,13 +20,13 @@ public class AskForRobotSymbolView {
         int choice = scanner.nextInt();
 
         if(choice == 1){
-            symbol = "o";
+            symbol = 'o';
         } else if(choice == 2){
-            symbol = "x";
+            symbol = 'x';
         } else if(choice == 3){
-            symbol = "+";
+            symbol = '+';
         } else if(choice == 4){
-            symbol = "*";
+            symbol = '*';
         } else{
             System.out.println("error");
         }
