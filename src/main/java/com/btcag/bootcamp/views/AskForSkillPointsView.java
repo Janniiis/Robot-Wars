@@ -42,7 +42,6 @@ public class AskForSkillPointsView {
             } else {
                 System.out.println("Ungültige auswahl");
             }
-
         }
     }
 
