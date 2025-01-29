@@ -1,5 +1,9 @@
 package com.btcag.bootcamp.services;
 
+import jakarta.websocket.server.PathParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +23,7 @@ public class GetRequests {
     protected static String gameId = "";
     protected static String playerId = "";
 
+    @RequestMapping
     public static void getAllBots() throws IOException {
         URL url = new URL(baseURL + "api/robots");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -126,7 +131,8 @@ public class GetRequests {
         con.disconnect();
     }
 
-    public static void getMapIndex() throws IOException {
+
+    public static String getMapIndex() throws IOException {
         URL url = new URL(baseURL + "api/games/game/" + gameId);
 
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -140,15 +146,65 @@ public class GetRequests {
         }
         in.close();
         con.disconnect();
-
+        String mapIndex = null;
         String contentString = content.toString();
         Pattern pattern = Pattern.compile("\"mapIndex\":\\s*(\\d+)");
         Matcher matcher = pattern.matcher(contentString);
         if (matcher.find()) {
-            String mapIndex = matcher.group(1);
+            mapIndex = matcher.group(1);
             System.out.println("Index: " + mapIndex);
         } else {
             System.out.println("Index nicht gefunden.");
         }
+        return mapIndex;
+    }
+
+    public static void getEnemyPlayerId() throws IOException {
+        URL url = new URL(baseURL + "api/games/game/" + gameId);
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+
+        in.close();
+        System.out.println(content);
+        con.disconnect();
+
+        String contentString = content.toString();
+        Pattern pattern = Pattern.compile("\"id\":\\s*(\\d+)");
+        Matcher matcher = pattern.matcher(contentString);
+        String[] listId = new String[3];
+        if (matcher.find()) {
+            listId[1]= matcher.group(1);
+            System.out.println("Id: " + listId[0]);
+        } else {
+            System.out.println("Id nicht gefunden.");
+        }
+    }
+
+    @GetMapping("/api/robots/robot/{Id}")
+    public void getSpecificRobot(@PathParam(value = "Id")String id) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String Id = scanner.nextLine();
+        URL url = new URL(botURL + id);
+        System.out.println(url);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+        in.close();
+        System.out.println(content);
+        con.disconnect();
     }
 }

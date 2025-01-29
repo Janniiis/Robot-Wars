@@ -1,6 +1,7 @@
 package com.btcag.bootcamp.services;
 
 import com.btcag.bootcamp.models.Bot;
+import com.btcag.bootcamp.views.AskForAlignmentView;
 import com.btcag.bootcamp.views.AskForMoveActionView;
 import org.json.JSONObject;
 
@@ -12,7 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-import static com.btcag.bootcamp.services.GetRequests.getMapIndex;
+//import static com.btcag.bootcamp.services.GetRequests.getMapIndex;
 
 public class PostRequests {
     protected static String baseURL = "https://eumth8x973.execute-api.eu-central-1.amazonaws.com/prod/";
@@ -175,10 +176,16 @@ public class PostRequests {
     public static void makeAMove(Bot bot) throws IOException {
         String move = "";
         int mapIndex = 0;
-        String alignment = "N";
+        String alignment = bot.getAlignment();
 
         move = AskForMoveActionView.display(bot);
-        getMapIndex();
+        if (move == "ALIGN"){
+            alignment = AskForAlignmentView.display();
+            bot.setAlignment(alignment);
+        } else if (move == "MOVE") {
+            mapIndex++;
+        }
+        //getMapIndex();
         URL url = new URL(gameURL + gameId + "/move/player/" + playerId);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");

@@ -22,16 +22,16 @@ public class AskForMoveActionView {
         int readIn = scanner.nextInt();
 
         String choice = "";
-        if (readIn == 1) {
+        if (readIn == 2) {
             if (bot.getMovementRate() != 0) {
                 choice = "MOVE";
             } else if(bot.getMovementRate() <= 0) {
                 choice = "END";
             }
-        } else if (readIn == 2) {
+        } else if (readIn == 1) {
             choice = "ATTACK";
         } else if (readIn == 3) {
-            choice = "END";
+            choice = "ALIGN";
         } else {
             System.out.println("error");
         }

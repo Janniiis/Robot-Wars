@@ -1,26 +1,26 @@
 package com.btcag.bootcamp.enums;
 
 public enum Alignments{
-    NORD,
-    SUED,
-    OST,
-    WEST,
-    NORDWEST,
-    NORDOST,
-    SUEDWEST,
-    SUEDOST;
+    N,
+    S,
+    E,
+    W,
+    NW,
+    NO,
+    SW,
+    SO;
 
 
     public static Alignments fromUserInput(char userChoice) {
         return switch (userChoice) {
-            case 'w' -> NORD;
-            case 'x' -> SUED;
-            case 'd' -> OST;
-            case 'a' -> WEST;
-            case 'q' -> NORDWEST;
-            case 'e' -> NORDOST;
-            case 'y' -> SUEDWEST;
-            case 'c' -> SUEDOST;
+            case 'w' -> N;
+            case 'x' -> S;
+            case 'd' -> E;
+            case 'a' -> W;
+            case 'q' -> NW;
+            case 'e' -> NO;
+            case 'y' -> SW;
+            case 'c' -> SO;
             default -> null;
         };
     }

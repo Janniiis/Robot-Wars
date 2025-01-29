@@ -7,6 +7,7 @@ public class Bot {
     int attackRange;
     int movementRate;
     char symbol;
+    String alignment;
 
     public Bot( String name) {
         this.name = name;
@@ -15,6 +16,7 @@ public class Bot {
         this.attackRange= 1;
         this.movementRate= 1;
         this.symbol = 'o';
+        this.alignment= "N";
     }
 
     public int getAttackDamage() {
@@ -41,6 +43,10 @@ public class Bot {
         return symbol;
     }
 
+    public String getAlignment(){
+        return alignment;
+    }
+
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
@@ -63,6 +69,10 @@ public class Bot {
 
     public void setSymbol(char symbol) {
         this.symbol = symbol;
+    }
+
+    public void setAlignment(String alignment) {
+        this.alignment = alignment;
     }
 }
 
