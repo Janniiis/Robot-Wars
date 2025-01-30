@@ -28,7 +28,7 @@ public class AskForAlignmentView {
         Alignments alignments;
         do {
             alignments = Alignments.fromUserInput(
-                    scanner.next().toLowerCase().charAt(0)
+                    scanner.next().charAt(0)
             );
         } while (null == alignments);
         return alignments.toString();

@@ -5,7 +5,7 @@ import com.btcag.bootcamp.enums.Directions;
 import java.util.Scanner;
 
 public class MoveRobotView {
-    public static Directions display() {
+    public static String display() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 «--------------------------------------------------------------»
@@ -28,9 +28,9 @@ public class MoveRobotView {
         Directions direction;
         do {
             direction = Directions.fromUserInput(
-                    scanner.next().toLowerCase().charAt(0)
+                    scanner.next().charAt(0)
             );
         } while (null == direction);
-        return direction;
+        return direction.toString();
     }
 }

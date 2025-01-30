@@ -1,8 +1,10 @@
 package com.btcag.bootcamp.services;
 
+import com.btcag.bootcamp.enums.Directions;
 import com.btcag.bootcamp.models.Bot;
 import com.btcag.bootcamp.views.AskForAlignmentView;
 import com.btcag.bootcamp.views.AskForMoveActionView;
+import com.btcag.bootcamp.views.MoveRobotView;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -173,9 +175,8 @@ public class PostRequests {
         }
     }
 
-    public static void makeAMove(Bot bot) throws IOException {
+    public static int makeAMove(Bot bot) throws IOException {
         String move = "";
-        int mapIndex = 0;
         String alignment = bot.getAlignment();
 
         move = AskForMoveActionView.display(bot);
@@ -183,7 +184,33 @@ public class PostRequests {
             alignment = AskForAlignmentView.display();
             bot.setAlignment(alignment);
         } else if (move == "MOVE") {
-            mapIndex++;
+           String direction = MoveRobotView.display();
+           int mapIndex = 0;
+           if (direction.equals("w")) {
+               mapIndex -= 9;
+               System.out.println(mapIndex);
+           } else if (direction.equals("s")) {
+               mapIndex += 9;
+               System.out.println(mapIndex);
+           } else if (direction.equals("a")) {
+               mapIndex--;
+               System.out.println(mapIndex);
+           } else if (direction.equals("d")) {
+               mapIndex++;
+               System.out.println(mapIndex);
+           } else if (direction.equals("q")) {
+               mapIndex -= 10;
+               System.out.println(mapIndex);
+           } else if (direction.equals("e")) {
+               mapIndex -= 8;
+               System.out.println(mapIndex);
+           } else if (direction == "y") {
+               mapIndex += 8;
+               System.out.println(mapIndex);
+           } else if (direction == "c") {
+               mapIndex += 10;
+               System.out.println(mapIndex);
+           }
         }
         //getMapIndex();
         URL url = new URL(gameURL + gameId + "/move/player/" + playerId);
@@ -211,7 +238,9 @@ public class PostRequests {
         System.out.println(code);
         String response = con.getResponseMessage();
         System.out.println(response);
+        return mapIndex;
     }
+
 
 
 }
