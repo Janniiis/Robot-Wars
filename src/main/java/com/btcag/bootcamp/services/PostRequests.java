@@ -187,11 +187,15 @@ public class PostRequests {
             alignment = AskForAlignmentView.display();
             bot.setAlignment(alignment);
         } else if (move == "MOVE") {
-           Battlefield battlefield = new Battlefield(5, 9);
-           direction = MoveRobotView.display();
-           battlefield.movePlayer(direction);
-           battlefield.printSymbol(direction, bot.getSymbol());
-           battlefield.initialiseMap();
+            while (move != "END") {
+                Battlefield battlefield = new Battlefield(5, 9);
+                battlefield.printSymbol(0, bot.getSymbol());
+                battlefield.initialiseMap();
+                direction = MoveRobotView.display();
+                battlefield.movePlayer(direction);
+                battlefield.printSymbol(direction, bot.getSymbol());
+                battlefield.initialiseMap();
+            }
         }
         URL url = new URL(gameURL + gameId + "/move/player/" + playerId);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();

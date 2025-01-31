@@ -23,28 +23,20 @@ public class MoveRobotView {
                 """);
 
         String direction = scanner.nextLine();
+        scanner.close(); // Scanner schließen
 
-
-
-
-    int mapIndex = 0;
-        if (direction.equals("w")){
-        mapIndex -= 9;
-    } else if (direction.equals("s")){
-        mapIndex += 9;
-    } else if (direction.equals("a")){
-        mapIndex--;
-    } else if (direction.equals("d")){
-        mapIndex++;
-    } else if (direction.equals("q")){
-        mapIndex -= 10;
-    } else if (direction.equals("e")){
-        mapIndex -= 8;
-    } else if (direction.equals("y")){
-        mapIndex += 8;
-    } else if (direction.equals("c")){
-        mapIndex += 10;
-    }
+        int mapIndex = 0;
+        switch (direction) {
+            case "w" -> mapIndex -= 9;
+            case "s" -> mapIndex += 9;
+            case "a" -> mapIndex--;
+            case "d" -> mapIndex++;
+            case "q" -> mapIndex -= 10;
+            case "e" -> mapIndex -= 8;
+            case "y" -> mapIndex += 8;
+            case "c" -> mapIndex += 10;
+            default -> System.out.println("Ungültige Eingabe. Bitte wähle eine gültige Richtung.");
+        }
         return mapIndex;
-}
+    }
 }
