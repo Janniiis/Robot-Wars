@@ -1,6 +1,7 @@
 package com.btcag.bootcamp.services;
 
 import com.btcag.bootcamp.enums.Directions;
+import com.btcag.bootcamp.models.Battlefield;
 import com.btcag.bootcamp.models.Bot;
 import com.btcag.bootcamp.views.AskForAlignmentView;
 import com.btcag.bootcamp.views.AskForMoveActionView;
@@ -26,7 +27,7 @@ public class PostRequests {
     protected static String robotId = "";
     protected static String gameId = "";
     protected static String playerId = "";
-    protected static String direction = "";
+    protected static int direction;
 
     public static void createRobot(Bot bot) throws IOException {
         URL url = new URL(botURL);
@@ -186,7 +187,11 @@ public class PostRequests {
             alignment = AskForAlignmentView.display();
             bot.setAlignment(alignment);
         } else if (move == "MOVE") {
+           Battlefield battlefield = new Battlefield(5, 9);
            direction = MoveRobotView.display();
+           battlefield.movePlayer(direction);
+           battlefield.printSymbol(direction, bot.getSymbol());
+           battlefield.initialiseMap();
         }
         URL url = new URL(gameURL + gameId + "/move/player/" + playerId);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -200,7 +205,7 @@ public class PostRequests {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("playerId", playerId);
         jsonObject.put("movementType", move);
-        jsonObject.put("mapIndex", getMapIndex());
+        jsonObject.put("mapIndex", direction);
         jsonObject.put("align", alignment);
         String jsonInputString = jsonObject.toString();
 
@@ -214,29 +219,4 @@ public class PostRequests {
         String response = con.getResponseMessage();
         System.out.println(response);
     }
-
-    public static int getMapIndex(){
-        int mapIndex = 0;
-        if (direction.equals("w")){
-            mapIndex -= 9;
-        } else if (direction.equals("s")){
-            mapIndex += 9;
-        } else if (direction.equals("a")){
-            mapIndex--;
-        } else if (direction.equals("d")){
-            mapIndex++;
-        } else if (direction.equals("q")){
-            mapIndex -= 10;
-        } else if (direction.equals("e")){
-            mapIndex -= 8;
-        } else if (direction.equals("y")){
-            mapIndex += 8;
-        } else if (direction.equals("c")){
-            mapIndex += 10;
-        }
-        return mapIndex;
-    }
-
-
-
 }
